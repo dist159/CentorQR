@@ -1,0 +1,66 @@
+{
+  "_from": "git+https://github.com/leecrossley/cordova-plugin-pedometer.git",
+  "_id": "cordova-plugin-pedometer@0.4.1",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/cordova-plugin-pedometer",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/leecrossley/cordova-plugin-pedometer.git",
+    "rawSpec": "https://github.com/leecrossley/cordova-plugin-pedometer.git",
+    "saveSpec": "git+https://github.com/leecrossley/cordova-plugin-pedometer.git",
+    "fetchSpec": "https://github.com/leecrossley/cordova-plugin-pedometer.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/leecrossley/cordova-plugin-pedometer.git#7d5be271887731ae21dd0b51565405f211cfa2b4",
+  "_spec": "https://github.com/leecrossley/cordova-plugin-pedometer.git",
+  "_where": "D:\\DESARROLLO_CORDOVA\\Centor_v13",
+  "author": {
+    "name": "Lee Crossley",
+    "email": "leee@hotmail.co.uk",
+    "url": "http://ilee.co.uk/"
+  },
+  "bugs": {
+    "url": "https://github.com/leecrossley/cordova-plugin-pedometer/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-pedometer",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "deprecated": false,
+  "description": "Cordova / PhoneGap Plugin for the Core Motion Pedometer to fetch pedestrian-related data, such as step counts and other information about the distance travelled.",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "homepage": "https://github.com/leecrossley/cordova-plugin-pedometer#readme",
+  "keywords": [
+    "cordova",
+    "core motion",
+    "pedometer",
+    "steps",
+    "distance",
+    "pedestrian",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-pedometer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leecrossley/cordova-plugin-pedometer.git"
+  },
+  "version": "0.4.1"
+}

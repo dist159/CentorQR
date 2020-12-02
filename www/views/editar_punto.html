@@ -1,0 +1,19 @@
+<!-- Cabecera -->
+<div class="cabecera">
+	<table width="100%">
+		<tr>
+			<td width="50"><img src="img/menu.png" width="40" style="padding: 7px;" onclick="VerMenuLateral()"></td>
+			<td align="center" style="padding-right: 30px;" id="ti_editar_punto">Editar Punto</td>
+		</tr>
+	</table>
+</div>
+
+<div align="center" style="margin-top: 40px; margin-bottom: 20px;">
+	<div class="ti_setup"><span id="nombre_sitio_edit">Checkpoint Name</span> <font color="#f00">*</font></div>
+	<input type="text" id="point_name_edit" data-role="none" class="input_text">
+</div>
+
+<div>
+	<input type="button" data-role="none" value="Edit" class="bt_verde bt_editar" onclick="Editar_Punto_Nombre();" style="width: 90%;">
+	<input type="button" data-role="none" value="Cancel" class="bt_rojo bt_cancelar" onclick="Ir_Home();" style="width: 90%;">
+</div>

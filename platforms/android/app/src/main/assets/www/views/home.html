@@ -1,0 +1,63 @@
+
+<!-- Cabecera -->
+<div class="cabecera">
+    <table width="100%">
+    <tr>
+        <td width="50"><img src="img/menu.png" width="40" style="padding: 7px;" onclick="VerMenuLateral()"></td>
+        <td align="center" style="padding-right: 30px;"><b>CENTOR</b></td>
+        <td width="50"><div style="width: 40px; height: 40px; line-height: 36px; background-color: #F00; color: #FFF; border-radius: 60px; text-align: center; font-size: 13px; font-weight: bold;" id="badge">0</div></td>
+    </tr>
+    </table>
+</div>
+
+<div align="center" style="padding: 15px; color: #fff; background-color: #F44336;" id="base_crono">
+    <span id="ti_intervalo_tiempo">Interval Timer:</span> <span id="horas_timer"></span>h: <span id="minutos_timer"></span>m
+    <div id='crono'></div>
+</div>
+
+<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
+    <img src="img/btn_alerta.png" width="50%" onclick="Pop_up_Alerta();">
+    <div align="center"><b id="ti_press_emergecy">Press in case of emergency</b></div>
+</div>
+
+<span id="acelera"></span>
+
+<div>
+	
+    <input type="button" value="Record Checkpoint" class="bt_azul" data-role="none" style="width: 90%; margin-bottom: 0px; padding-top:15px; padding-bottom:15px" onclick="Ir_Escanner()" id="bt_record_check_point">
+    <input type="button" value="Inident Message" class="bt_azul" data-role="none" style="width: 90%; margin-bottom: 0px; margin-top: 5px;" onclick="Ir_Mensaje_Inicidente();" id="bt_incident_message">
+    <input type="button" value="Transmit Tours" class="bt_verde" data-role="none" style="width: 90%; margin-bottom: 0px; margin-top: 5px;" onclick="Validar_Transmision_Tour()" id="bt_trasnmit_tours">
+</div>
+
+<div style="background-color: #f2f2f2; margin-top: 15px;">
+
+	<div style="padding: 15px; padding-left: 23px; text-align: left; color: #004781;" id="ti_emergenci_data_transmit">
+		Emergency Transmission Data
+	</div>
+
+	<table width="100%" style="border-bottom: 1px solid #ccc">
+                    <tr>
+                        <td width="50" align="right"><img src="img/icono_celular.png" width="40"></td>
+                        <td id="cont_telefono"></td>
+                    </tr>
+	</table>
+
+	<table width="100%" style="border-bottom: 1px solid #ccc">
+		<tr>
+			<td width="50" align="right"><img src="img/Icono_mensaje.png" width="40"></td>
+			<td id="cont_sms"></td>
+		</tr>
+	</table>
+
+	<table width="100%" style="border-bottom: 1px solid #ccc">
+		<tr>
+			<td width="50" align="right"><img src="img/Icono_correo.png" width="40"></td>
+			<td id="cont_mail_1"></td>
+		</tr>
+		<tr>
+			<td width="50" align="right"><img src="img/Icono_correo.png" width="40"></td>
+			<td id="cont_mail_2"></td>
+		</tr>
+	</table>
+
+</div>

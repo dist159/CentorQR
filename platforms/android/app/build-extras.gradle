@@ -1,0 +1,13 @@
+// Example build-extras.gradle
+// This file is included at the beginning of `build.gradle`
+
+
+dependencies {
+   implementation ('com.google.api-client:google-api-client-android:+') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+      implementation ('com.google.apis:google-api-services-drive:v3-rev110-1.23.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+}
+

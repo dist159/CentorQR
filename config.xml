@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="org.centoraresqr.com" version="15.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Centor Ares</name>
+    <description>
+       Guard Tour Verification
+    </description>
+    <author email="eniac321@gmail.com" href="http://celmediaapps.com">
+        Celmedia Colombia
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <splash platform="android" qualifier="ldpi" src="www/splash/ldpi.jpg" />
+    <splash platform="android" qualifier="mdpi" src="www/splash/mdpi.jpg" />
+    <splash platform="android" qualifier="hdpi" src="www/splash/hdpi.jpg" />
+    <splash platform="android" qualifier="xhdpi" src="www/splash/xhdpi.jpg" />
+    <splash platform="android" qualifier="port-xxhdpi" src="www/splash/portrait-xxhdpi.jpg" />
+    <splash platform="android" qualifier="land-xxhdpi" src="www/splash/landscape-xxhdpi.jpg" />
+    <icon platform="android" qualifier="ldpi" src="www/icon/ldpi.png" />
+    <icon platform="android" qualifier="mdpi" src="www/icon/mdpi.png" />
+    <icon platform="android" qualifier="hdpi" src="www/icon/hdpi.png" />
+    <icon platform="android" qualifier="xhdpi" src="www/icon/xhdpi.png" />
+
+    <splash src="www/splash/splash.png" />
+	
+    <preference name="Orientation" value="portrait" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="cryptoPort" value="8080" />
+	<preference name="DisallowOverscroll" value="true" />
+</widget>

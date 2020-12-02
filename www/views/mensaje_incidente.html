@@ -1,0 +1,18 @@
+<div class="cabecera">
+	<table width="100%">
+		<tr>
+			<td width="50"><img src="img/menu.png" width="40" style="padding: 7px;" onclick="VerMenuLateral()"></td>
+			<td align="center" style="padding-right: 30px;" id="ti_mensaje_incidentes">Record Incidents</td>
+		</tr>
+	</table>
+</div>
+
+<div class="ti_setup" style="text-align: center; margin-top: 20%;"><span id="text_descripcion_men">Key in incedent Descriptión</span> <font color="#f00">*</font></div>
+
+<div class="sub_ti_setup" id="max_50_palabras">Max. 200 Charapters</div>
+<textarea id="text_incident_message" data-role="none" class="input_text" maxlength="200"></textarea>
+
+<div align="center" style="width: 100%; margin-top:30px">
+	<input type="button" data-role="none" value="Save" class="bt_verde bt_save" onclick="Ir_Home();Guardar_Mensaje();" style="width: 90%;">
+	<input type="button" data-role="none" value="Cancel" class="bt_rojo bt_cancelar" onclick="Ir_Home();" style="width: 90%;">
+</div> 

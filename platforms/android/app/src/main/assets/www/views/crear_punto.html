@@ -1,0 +1,34 @@
+<!-- Cabecera -->
+<div class="cabecera">
+    <table width="100%">
+        <tr>
+        <td width="50"><img src="img/menu.png" width="40" style="padding: 7px;" onclick="VerMenuLateral()"></td>
+        <td align="center" style="padding-right: 30px;" id="ti_crear_ronda">Created Tours</td>
+        </tr>
+    </table>
+</div>
+
+<div style="background-color: #e3ffe7; padding: 10px; color: #39b54a; font-size: 28px;">
+    <span id="confirmar_escaneo">Scan succesfull!</span>
+    <div id="checkp_serial" style="color:#000"></div>
+</div>
+
+<div align="center" style="margin-top: 40px; margin-bottom: 20px;">
+    <div class="ti_setup"><span id="nombre_punto">Checkpoint Name</span> <font color="#f00">*</font></div>
+    <input type="text" id="check_name" data-role="none" class="input_text">
+
+    <div id="solo_startpoint">
+        <div class="ti_setup"><span id="nombre_tour_conf">Tour Name </span><font color="#f00">*</font></div>
+        <input type="text" id="check_tour_name" data-role="none" class="input_text"> 
+    </div>
+
+    <input type="hidden" id="ckeck_id_qr" value="">
+    <input type="hidden" id="ckeck_tipo" value="">
+         
+</div>
+
+<div>
+    <input type="button" data-role="none" value="Save Start Point" class="bt_verde" onclick="Guardar_Punto(1);" id="bt_star_point" style="width: 90%;">
+    <input type="button" data-role="none" value="Save Control Point" class="bt_verde" onclick="Guardar_Punto(2);" id="bt_control_point" style="width: 90%;">
+    <input type="button" data-role="none" value="Cancel" class="bt_rojo bt_cancelar" onclick="Ir_Escanner_Tour();" style="width: 90%;">
+</div>

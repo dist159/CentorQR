@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="org.centoraresqr.com" version="15.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="Clipboard">
+        <param name="android-package" value="com.verso.cordova.clipboard.Clipboard" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="BackgroundMode">
+        <param name="android-package" value="de.appplant.cordova.plugin.background.BackgroundMode" />
+    </feature>
+    <feature name="BackgroundModeExt">
+        <param name="android-package" value="de.appplant.cordova.plugin.background.BackgroundModeExt" />
+    </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <feature name="Pedometer">
+        <param name="android-package" value="org.apache.cordova.pedometer.PedoListener" />
+    </feature>
+    <feature name="QRScanner">
+        <param name="android-package" value="com.bitpay.cordova.qrscanner.QRScanner" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Sms">
+        <param name="android-package" value="com.cordova.plugins.sms.Sms" />
+    </feature>
+    <feature name="GoogleDrive">
+        <param name="android-package" value="gr.jcdenton.GoogleDrive" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <allow-navigation href="cdvfile:*" />
+    <name>Centor Ares</name>
+    <description>
+       Guard Tour Verification
+    </description>
+    <author email="eniac321@gmail.com" href="http://celmediaapps.com">
+        Celmedia Colombia
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <splash platform="android" qualifier="ldpi" src="www/splash/ldpi.jpg" />
+    <splash platform="android" qualifier="mdpi" src="www/splash/mdpi.jpg" />
+    <splash platform="android" qualifier="hdpi" src="www/splash/hdpi.jpg" />
+    <splash platform="android" qualifier="xhdpi" src="www/splash/xhdpi.jpg" />
+    <splash platform="android" qualifier="port-xxhdpi" src="www/splash/portrait-xxhdpi.jpg" />
+    <splash platform="android" qualifier="land-xxhdpi" src="www/splash/landscape-xxhdpi.jpg" />
+    <icon platform="android" qualifier="ldpi" src="www/icon/ldpi.png" />
+    <icon platform="android" qualifier="mdpi" src="www/icon/mdpi.png" />
+    <icon platform="android" qualifier="hdpi" src="www/icon/hdpi.png" />
+    <icon platform="android" qualifier="xhdpi" src="www/icon/xhdpi.png" />
+    <splash src="www/splash/splash.png" />
+    <allow-intent href="market:*" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="KeepRunning" value="true" />
+    <preference name="Orientation" value="portrait" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="cryptoPort" value="8080" />
+    <preference name="DisallowOverscroll" value="true" />
+</widget>

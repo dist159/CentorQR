@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+        content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * gap://ready file:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src * 'unsafe-inline' 'unsafe-eval'">
+
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="js/jquery-1.11.1.js"></script>
+    <script src="js/jquery.mobile-1.4.5.js"></script>
+    <script src="js/papaparse.js"></script>
+
+    <script src="js/lenguaje.js"></script>
+    <script src="js/navegacion.js"></script>
+    <script src="js/escaner.js"></script>
+    <script src="js/views.js"></script>
+
+    <script src="js/function.js"></script>
+    <script src="js/tours.js"></script>
+    <script src="js/delete.js"></script>
+    <script src="js/editar.js"></script>
+    <script src="js/cargar.js"></script>
+    <script src="js/smtp.js"></script>
+    <script src="js/Blowfish.js"></script>
+    <script src="js/tomar_foto.js"></script>
+    <script src="js/contadores.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/smtp2go.js"></script>
+    <script src="js/crc8.js"></script>
+    <script src="js/reporte.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/pedometro.js"></script>
+    <script src="js/acelerometro.js"></script>
+
+
+
+    <!-- <link rel="stylesheet" type="text/css" href="css/index.css"> -->
+    <title>Centor Ares</title>
+</head>
+
+<!-- Cuerpo -->
+<!-- Cuerpo -->
+
+<body>
+    <!-- PRELOADER -->
+    <!-- PRELOADER -->
+    <div class="PopUp" align="center" id="Preloader">
+        <div class="BasePopUp">
+            <img src="img/logo_azul.png" width="40%">
+            <div>Processing...</div>
+        </div>
+    </div>
+
+    <!-- POP UP VALIDAR KEY SUPERVISOR -->
+    <!-- POP UP VALIDAR KEY SUPERVISOR -->
+    <div class="PopUp" align="center" id="PopUpValidarKey" style="z-index: 500;">
+        <div class="BasePopUp">
+            <div id="cont_popup_validar_key"></div>
+        </div>
+    </div>
+
+    <!-- POP UP VALIDAR PASSWORD DIA - SOLO TRANSMISION -->
+    <!-- POP UP VALIDAR PASSWORD DIA - SOLO TRANSMISION -->
+    <div class="PopUp" align="center" id="PopUpValidarPassDia" style="z-index: 500;">
+        <div class="BasePopUp">
+            <div id="cont_popup_validar_pass"></div>
+        </div>
+    </div>
+
+    <!-- POP UP CHECKPOINT CONFIGURACION  -->
+    <!-- POP UP CHECKPOINT CONFIGURACION  -->
+    <div class="PopUp" align="center" id="PopUpCheckPointSet" style="z-index: 500;">
+        <div class="BasePopUp">
+            <div id="cont_popup_checkpoint_set"></div>
+        </div>
+    </div>
+
+    <!-- POP UP CHECKPOINT REGISTRO TOUR -->
+    <!-- POP UP CHECKPOINT REGISTRO TOUR -->
+    <div class="PopUp" align="center" id="PopUpCheckPointRecord" style="z-index: 500;">
+        <div class="BasePopUp">
+            <div id="cont_popup_checkpoint_registro"></div>
+        </div>
+    </div>
+
+    <!-- POP UP CHECKPOINT LICENCIA  -->
+    <!-- POP UP CHECKPOINT LICENCIA  -->
+    <div class="PopUp" align="center" id="PopUpLicencia" style="z-index: 500;">
+        <div class="BasePopUp">
+            <div id="cont_popup_licencia"></div>
+        </div>
+    </div>
+
+    <!-- POP UP ALERTA EMERGENCIA  -->
+    <!-- POP UP ALERTA EMERGENCIA  -->
+    <div class="PopUp" align="center" id="PopUpAlerta" style="z-index: 500;">
+        <div class="BasePopUp" style="background-color: rgb(209, 58, 35); color: #fff;">
+            <div id="cont_alerta_contador"></div>
+        </div>
+    </div>
+
+    <!-- POP UP CREAR TOUR -->
+    <!-- POP UP CREAR TOUR -->
+    <div class="PopUp" align="center" id="PopUpCrearTour" style="z-index: 500;">
+        <div class="BasePopUp">
+            <div id="cont_popup_CrearTour">
+            </div>
+        </div>
+    </div>
+
+    <!-- POP UP EDITAR SITIO -->
+    <!-- POP UP EDITAR SITIO -->
+    <div class="PopUp" align="center" id="PopUpEditarSitio" style="z-index: 500;">
+        <div class="BasePopUp">
+            <div id="cont_popup_Editar_Sitio" style="position: relative; z-index: 2 ">
+                <div style="text-align: left; margin-top: 15px;" onclick="Editar_Sitio()" id="bt_edit_site">Edit Site
+                </div>
+                <div style="text-align: left; margin-top: 15px;" onclick="Eliminar_Sitio()" id="bt_delete_site">Delete
+                    Site</div>
+                <div style="text-align: left; margin-top: 15px;" onclick="Exportar_Sitio()" id="bt_export_site">Export
+                    Site</div>
+            </div>
+
+            <div id="cont_popup_Editar_Ronda" style="position: relative; z-index: 2 ">
+                <div style="text-align: left; margin-top: 15px;" onclick="Editar_Tour()" id="bt_edit_tour">Edit Tour
+                </div>
+                <div style="text-align: left; margin-top: 15px;" onclick="Eliminar_Tour()" id="bt_delete_tour">Delete
+                    Tour</div>
+            </div>
+
+            <div id="cont_popup_Editar_Punto" style="position: relative; z-index: 2 ">
+                <div style="text-align: left; margin-top: 15px;" onclick="Editar_Punto()" id="bt_edit_point">Edit Point
+                </div>
+                <div style="text-align: left; margin-top: 15px;" onclick="Eliminar_Punto()" id="bt_delete_point">Delete
+                    Point</div>
+            </div>
+
+            <div style="position: relative; z-index: 2 ">
+                <div style="text-align: left; margin-top: 15px;" onclick="Ocultar_Editar()" id="bt_cancel_pop">Cancel
+                </div>
+            </div>
+
+            <input type="hidden" id="variable_seleccion">
+            <input type="hidden" id="variable_tour">
+
+            <div onclick="Ocultar_Editar()"
+                style="position: fixed; width: 100%; height: 100%; left: 0; top: 0; z-index: 1">
+                &nbsp
+            </div>
+        </div>
+    </div>
+
+    <!-- POP UP ACERCA DE -->
+    <!-- POP UP ACERCA DE -->
+    <div class="PopUp" align="center" id="PopUpAcerca" style="z-index: 500;">
+        <div class="BasePopUp" style="margin-top: 20px; width: 82%;">
+            <div id="cont_popup_Acerca">
+            </div>
+        </div>
+    </div>
+
+    <!-- POP UP  -->
+    <!-- POP UP -->
+    <div class="PopUp" align="center" id="PopUp" style="z-index: 500;">
+        <div class="BasePopUp">
+            <div class="parrafos" id="parrafo_info">Procesando...</div>
+        </div>
+    </div>
+
+    <!-- POP UP ALERTA QUIETUD -->
+    <!-- POP UP ALERTA QUIETUD -->
+    <div class="PopUp" align="center" id="PopUpQuietud" style="z-index: 500;">
+        <div class="BasePopUp" style="margin-top: 20px; width: 82%;">
+            <div id="cont_popup_Quietud">
+
+
+                <img src="img/icono_advertencia_amarillo.png" width="50">
+                <div class="parrafos">
+                    <div id="alert_quietud">
+                        En 5 minutos se enviará una alerta informando inactividad en la ronda.
+                    </div>
+
+                    <div align="center">
+                        <input type="button" data-role="none" value="Cancel" class="bt_rojo bt_cancelar"
+                            onclick="Cancelar_Quietud()" style="width: 90%">
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MENU LATERAL -->
+    <!-- MENU LATERAL -->
+    <div align="left" class="menu_lateral" id="menu_lateral">
+        <div align="center" class="base_lateral">
+            <div id="cont_lateral"></div>
+        </div>
+        <div onclick="OcultarMenuLateral()"
+            style="position: fixed; width: 100%; height: 100%; left: 0; top: 0; z-index: 1">
+            &nbsp
+        </div>
+    </div>
+
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+    <!-- PAGINAS APP -->
+
+    <!-- OBTENER UDID -->
+    <!-- OBTENER UDID -->
+    <div data-role="page" id="UUID" class="page" align="center" style="background-color:#000039 ">
+        <div id="uuid">
+            <img src="img/logo.png" width="70%" style="margin-top: 20%; margin-bottom:20%;">
+            <div>
+                <div style="margin-top: 15px; margin-bottom: 15px; color: #fff" id="ti_mensaje_udid">Este es el UUID de
+                    este dispositivo.</div>
+                <input type="text" value="" id="uuid_cont" data-role="none" class="input_text" disabled="disabled"
+                    style="color:#fff">
+            </div>
+            <div align="center" style="position: fixed; width: 100%; bottom: 30px; left: 0;">
+                <input type="button" name="" data-role="none" value="Copiar Y Continuar" class="bt_blanco bt_nex"
+                    onclick="Copiar_Codigo()">
+            </div>
+        </div>
+    </div>
+
+    <!-- LENGUAJE -->
+    <!-- LENGUAJE -->
+    <div data-role="page" id="LENGUAJE" class="page" align="center" style="background-color:#000039 ">
+        <div id="lenguaje">
+        </div>
+    </div>
+
+    <!-- SCANNER LICENCIA -->
+    <!-- SCANNER LICENCIA -->
+    <div data-role="page" id="SCANNER_LICENCIA" class="page" align="center"
+        style="background-color: rgba(0, 0, 57, 0) !important;">
+        <div id="scanner_licencia"
+            style=" background-image: url(img/area.png); background-size: cover; background-position: center;">
+            <div align="left" style="padding: 10px;">
+                <img src="img/btn_linterna_on.png" width="40" onclick="Activar_luz()" id="linterna_on">
+                <img src="img/btn_linterna_off.png" width="40" onclick="Desactivar_luz()" id="linterna_off"
+                    style="display: none">
+            </div>
+            <div align="center" style="position: fixed; width: 100%; bottom: 30px; left: 0;">
+                <input type="button" data-role="none" value="Scan Licence" class="bt_verde" id="bt_scan_licence"
+                    onclick="Activar_Escanner(2);" style="width: 90%;">
+            </div>
+        </div>
+    </div>
+
+    <!-- CONFIGURACION -->
+    <!-- CONFIGURACION -->
+    <div data-role="page" id="SETUP" class="page" align="center">
+        <div id="setup">
+        </div>
+    </div>
+
+    <!-- SESION -->
+    <!-- SESION -->
+    <div data-role="page" id="SESION" class="page" align="center" style="background-color:#000039 ">
+        <div id="sesion">
+            <img src="img/logo.png" width="70%" style="margin-top: 20%; margin-bottom: 15px;">
+            <div>
+                <div style="margin-top: 15px; margin-bottom: 15px; color: #fff" id="ti_name_guard">Enter Guard Name
+                </div>
+                <input type="text" id="nombre_guarda_sesion" data-role="none" class="input_text"
+                    style="color: #c3c3c3;">
+            </div>
+            <div align="center" style="width: 100%; margin-top:20% ">
+                <input type="button" name="" data-role="none" value="Start" id="bt_start" class="bt_blanco"
+                    onclick="Sesion_Guarda()">
+            </div>
+        </div>
+    </div>
+
+    <!-- SCANNER CONFIGURAR -->
+    <!-- SCANNER CONFIGURAR -->
+    <div data-role="page" id="SCANNER_CONFIGURAR" class="page" align="center"
+        style="background-color: rgba(0, 0, 57, 0) !important;">
+        <div id="scanner_configurar"
+            style=" background-image: url(img/area.png); background-size: cover; background-position: center;">
+            <!-- Cabecera -->
+            <div class="cabecera">
+                <table width="100%">
+                    <tr>
+                        <td width="50"><img src="img/menu.png" width="40" style="padding: 7px;"
+                                onclick="VerMenuLateral()"></td>
+                        <td align="center" style="padding-right: 30px;" id="ti_crear_tour">Created Tours</td>
+                    </tr>
+                </table>
+            </div>
+            <div align="left" style="padding: 10px;">
+                <img src="img/btn_linterna_on.png" width="40" onclick="Activar_luz()" id="linterna_on_config">
+                <img src="img/btn_linterna_off.png" width="40" onclick="Desactivar_luz()" id="linterna_off_config"
+                    style="display: none">
+            </div>
+            <div align="center" style="position: fixed; width: 100%; bottom: 30px; left: 0;">
+                <input type="button" data-role="none" value="Scan" class="bt_verde" onclick="Activar_Escanner(3);"
+                    style="width: 90%;" id="bt_escaner_lic">
+                <input type="button" data-role="none" value="Finalizar" class="bt_rojo bt_terminar"
+                    onclick="Ir_Home(); Cancelar_Escaner();" style="width: 90%;">
+            </div>
+        </div>
+    </div>
+
+    <!-- CREAR SITIO -->
+    <!-- CREAR SITIO -->
+    <div data-role="page" id="CREAR_SITIO" class="page" align="center">
+        <div id="crear_sitio">
+        </div>
+    </div>
+
+    <!-- EDITAR SITIO -->
+    <!-- EDITAR SITIO -->
+    <div data-role="page" id="EDITAR_SITIO" class="page" align="center">
+        <div id="editar_sitio">
+        </div>
+    </div>
+
+    <!-- CREAR PUNTO -->
+    <!-- CREAR PUNTO -->
+    <div data-role="page" id="CREAR_PUNTO" class="page" align="center">
+        <div id="crear_punto">
+        </div>
+    </div>
+
+    <!-- EDITAR TOUR -->
+    <!-- EDITAR TOUR -->
+    <div data-role="page" id="EDITAR_TOUR" class="page" align="center">
+        <div id="editar_tour">
+        </div>
+    </div>
+
+    <!-- EDITAR PUNTO -->
+    <!-- EDITAR PUNTO -->
+    <div data-role="page" id="EDITAR_PUNTO" class="page" align="center">
+        <div id="editar_punto">
+        </div>
+    </div>
+
+    <!-- SCANNER -->
+    <!-- SCANNER -->
+    <div data-role="page" id="SCANNER" class="page" align="center"
+        style="background-color: rgba(0, 0, 57, 0) !important;">
+        <div id="scanner"
+            style=" background-image: url(img/area.png); background-size: cover; background-position: center;">
+            <!-- Cabecera -->
+            <div class="cabecera">
+                <table width="100%">
+                    <tr>
+                        <td width="50"><img src="img/menu.png" width="40" style="padding: 7px;"
+                                onclick="VerMenuLateral()"></td>
+                        <td align="center" style="padding-right: 30px;" id="ti_scanner_punto">Record Checkpoint</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div align="left" style="padding: 10px;">
+                <img src="img/btn_linterna_on.png" width="40" onclick="Activar_luz()" id="linterna_on_scanner">
+                <img src="img/btn_linterna_off.png" width="40" onclick="Desactivar_luz()" id="linterna_off_scanner"
+                    style="display: none">
+            </div>
+
+            <div align="center" style="position: fixed; width: 100%; bottom: 30px; left: 0;">
+                <input type="button" data-role="none" value="Scan" class="bt_verde" onclick="Activar_Escanner(1);"
+                    style="width: 90%;" id="bt_escanear">
+                <input type="button" data-role="none" value="Finalize" class="bt_rojo bt_finalizar"
+                    onclick="Ir_Home(); Cancelar_Escaner();" style="width: 90%;">
+            </div>
+        </div>
+    </div>
+
+    <!-- HOME -->
+    <!-- HOME -->
+    <div data-role="page" id="HOME" class="page" align="center">
+        <div id="home">
+        </div>
+    </div>
+
+    <!-- LISTA SITIOS -->
+    <!-- LISTA SITIOS -->
+    <div data-role="page" id="SITIOS" class="page" align="center">
+        <div id="sitios">
+            <div class="cabecera">
+                <table width="100%">
+                    <tr>
+                        <td width="50"><img src="img/menu.png" width="40" style="padding: 7px;"
+                                onclick="VerMenuLateral()"></td>
+                        <td align="center" style="padding-right: 30px;" id="ti_sitios">SITES</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="cont_sitios_lista">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- LISTA TOURS -->
+    <!-- LISTA TOURS -->
+    <div data-role="page" id="TOURS" class="page" align="center">
+        <div id="tours">
+            <div class="cabecera">
+                <table width="100%">
+                    <tr>
+                        <td width="50"><img src="img/menu.png" width="40" style="padding: 7px;"
+                                onclick="VerMenuLateral()"></td>
+                        <td align="center" style="padding-right: 30px;" id="ti_rondas">TOURS</td>
+                    </tr>
+                </table>
+            </div>
+            <input type="hidden" id="site_selected">
+            <div id="cont_tour_lista">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- LISTA PUNTOS -->
+    <!-- LISTA PUNTOS -->
+    <div data-role="page" id="PUNTOS" class="page" align="center">
+        <div id="PUNTOS">
+            <div class="cabecera">
+                <table width="100%">
+                    <tr>
+                        <td width="50"><img src="img/menu.png" width="40" style="padding: 7px;"
+                                onclick="VerMenuLateral()"></td>
+                        <td align="center" style="padding-right: 30px;">POINTS</td>
+                    </tr>
+                </table>
+            </div>
+            <input type="hidden" id="tour_selected">
+            <div id="cont_puntos_lista">
+            </div>
+        </div>
+    </div>
+
+    <!-- REPORTE-->
+    <!-- REPORTE -->
+    <div data-role="page" id="REPORTE" class="page" align="center">
+        <div id="reporte">
+            <div class="cabecera">
+                <table width="100%">
+                    <tr>
+                        <td width="50"><img src="img/menu.png" width="40" style="padding: 7px;"
+                                onclick="VerMenuLateral()"></td>
+                        <td align="center" style="padding-right: 30px;" id="ti_reportes">REPORTES</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="cont_reporte_lista">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- DETALLE TOUR -->
+    <!-- DETALLE TOUR -->
+    <div data-role="page" id="DETALLE_TOUR" class="page" align="center">
+        <div id="detalle_tour">
+            <div class="cabecera">
+                <table width="100%">
+                    <tr>
+                        <td width="50"><img src="img/menu.png" width="40" style="padding: 7px;"
+                                onclick="VerMenuLateral()"></td>
+                        <td align="center" style="padding-right: 30px;">Tour 1</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="cont_lista_tour">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MENSAJE DE INCIDENTES-->
+    <!-- MENSAJE DE INCIDENTES-->
+    <div data-role="page" id="MENSAJE_INCIDENTE" class="page" align="center">
+        <div id="mensaje_incidente">
+        </div>
+    </div>
+
+    <!-- CARGAR TOUR -->
+    <!-- CARGAR TOUR -->
+    <div data-role="page" id="CARGAR_TOURS" class="page" align="center">
+        <div id="cargar_tours">
+        </div>
+    </div>
+
+    <!-- ENVIAR FOTO -->
+    <!-- ENVIAR FOTO -->
+    <div data-role="page" id="ENVIAR_FOTO" class="page" align="center">
+        <div id="enviar_foto">
+        </div>
+    </div>
+
+    <!-- TUTORIAL -->
+    <!-- TUTORIAL -->
+    <div data-role="page" id="TUTORIAL" class="page" align="center">
+        <div id="tutorial">
+        </div>
+    </div>
+
+    <!-- XSCRIPT -->
+    <!-- XSCRIPT -->
+    <div id="xscript"></div>
+    <div id="xscript_sala"></div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            Vistas(); //AQUI SE EJECUTARA LAS FUNCIONALIDADES DE ARRANQUE DEL APP
+            $.mobile.defaultPageTransition = "slide";
+            idioma(localStorage.getItem("lenguaje")); //CARGAMOS EL IDIOMA
+            $("#scanner").height($(window).height());
+            $("#scanner_configurar").height($(window).height());
+            $("#scanner_licencia").height($(window).height());
+        });
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady() {
+            console.log("Inicio de app");
+
+
+
+
+            window.addEventListener("devicemotion", function (event) {
+                // Process event.acceleration, event.accelerationIncludingGravity,
+                // event.rotationRate and event.interval
+              
+              //  console.log("me estoy moviedno X "+ event.accelerationIncludingGravity.x)
+              //  console.log("me estoy moviedno Y "+ event.accelerationIncludingGravity.y)
+              //  console.log("me estoy moviedno Z "+ event.accelerationIncludingGravity.z)
+let index=0;
+let accelValuesX={}
+let accelValuesY={}
+let accelValuesZ={}
+                accelValuesX[index] = event.acceleration.x;
+            accelValuesY[index] = event.acceleration.y;
+            accelValuesZ[index] = event.acceleration.z;
+
+         let   rootSquare=Math.sqrt(Math.pow(event.accelerationIncludingGravity.x,2)+Math.pow(event.accelerationIncludingGravity.y,2)+Math.pow(event.accelerationIncludingGravity.z,2));
+            if(rootSquare<0.2)
+            {
+
+          //  Toast.makeText(this, "Fall detected", Toast.LENGTH_SHORT).show();
+
+          console.log("Caida detectada")
+          alert("Alerta se detecto una caida")
+
+            }
+
+            }, true);
+
+            /*
+            window.plugins.gdrive.uploadFile("archivo1.cvs","123,123,123",
+                function (res) {
+                    console.log(res);
+                    alert(res);
+                },
+                function (err) {
+                    console.log(err);
+                }
+            );*/
+          /*  window.plugins.gdrive.downloadFile("archivo1.cvs",
+                function (res) {
+                    console.log(res);
+                    alert(res);
+                },
+                function (err) {
+                    console.log(err);
+                }
+                );
+            */
+
+            //StatusBar.hide();
+            uuid = device.uuid;
+            $("#uuid_cont").val(uuid);
+            document.addEventListener("backbutton", onBackKeyDown, false);
+        }
+
+
+        function onBackKeyDown() {
+            $("#PopUpValidarKey").hide();
+            $("#PopUpCheckPointSet").hide();
+            $("#PopUpCheckPointRecord").hide();
+            $("#PopUpLicencia").hide();
+            $("#PopUpAlerta").hide();
+            $("#PopUpCrearTour").hide();
+            $("#PopUpEditarSitio").hide();
+            $("#PopUpAcerca").hide();
+            $("#PopUp").hide();
+            $("#menu_lateral").hide();
+
+            window.history.back();
+            //navigator.app.backHistory();
+            //History.go(-1);
+        }
+
+        function cerrar_app() {
+            navigator.app.exitApp();
+        }
+
+    </script>
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyC571YJNNW7Zq3YAaocI5ysUzPemttotzE",
+            authDomain: "prediccion-be02c.firebaseapp.com",
+            databaseURL: "https://prediccion-be02c.firebaseio.com",
+            projectId: "prediccion-be02c",
+            storageBucket: "prediccion-be02c.appspot.com",
+            messagingSenderId: "1071461941145",
+            appId: "1:1071461941145:web:aa231d8f9513e880895d08"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</body>
+
+</html>

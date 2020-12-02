@@ -1,0 +1,28 @@
+<div class="cabecera">
+	<table width="100%">
+		<tr>
+			<td width="50"><img src="img/menu.png" width="40" style="padding: 7px;" onclick="VerMenuLateral()"></td>
+			<td align="center" style="padding-right: 30px;" id="ti_cargar_ronda">Load Tours</td>
+		</tr>
+	</table>
+</div>
+
+<div style="padding-top: 15px; font-size: 14px; padding: 20px; text-align: justify; color: #004781;" id="mensaje_carga">
+	Recuerde que debe cargar el archivo en formato .CSV, si no los tiene solicitelos al supervisor.
+</div>
+
+<div>
+	<input type="button" data-role="none" value="Cargar Archivo" class="bt_verde bt_seleccionar_archivo" style="width: 89%;background-color: #004781;position: absolute;z-index: 0;">
+    <input type="file" data-role="none" id="file_rondas" class="bt_azul" style="width: 83%;font-size: 15px;opacity: 0;" onchange="ver_nombre_archivo()">
+    <div align="center" id="archivo_cargado_tmp"></div>
+
+	<input type="button" data-role="none" value="Subir" class="bt_verde bt_cargar" style="width: 89%;" onclick="Cargar_Base_Datos()">
+<!--
+	<input type="button" data-role="none" value="Descargar lugar unico" class="bt_verde bt_cargar_d" style="width: 89%;" onclick="Cargar_Base_DatosDrive()">
+-->
+	<input type="button" data-role="none" value="Descargar toda la base de datos"  style="width: 89%;" onclick="cargarTodaLaBaseDeDatos()">
+
+
+
+</div>
+

@@ -1,0 +1,75 @@
+<!-- Cabecera -->
+<div class="cabecera">
+    <table width="100%">
+        <tr>
+            <td align="center" style="padding: 25px;" id="ti_setup">Setup</td>
+        </tr>
+    </table>
+</div>
+
+<div align="center" style="margin-top: 40px; margin-bottom: 20px;">
+    <div class="ti_setup" id="ti_key_super">Key in Supervisor PIN <font color="#f00">*</font></div>
+    <input type="text" id="set_key_supervisor" data-role="none" class="input_text" maxlength="4">
+
+    <div class="ti_setup" id="ti_report_destination">Report Destination Emails <font color="#f00">*</font></div>
+
+    <div class="sub_ti_setup" id="ti_email_1">Email 1 <font color="#f00">*</font></div>
+    <input type="email" id="set_mail_1" data-role="none" class="input_text">
+
+    <div class="sub_ti_setup" id="ti_email_2">Email 2 <font color="#f00">*</font></div>
+    <input type="email" id="set_mail_2" data-role="none" class="input_text">
+
+    <div class="ti_setup" id="ti_report_transmit">Report Transmition Interval <font color="#f00">*</font></div>
+
+    <div class="sub_ti_setup" id="place_hours">Hours(04 to 99 and 15 min. Intervals) <font color="#f00">*</font></div>
+    <input type="number" data-role="none" class="input_text" style="width: 42%" id="set_hora_transmicion" min="4" onchange="minimo_max()">
+    <select data-role="none" class="input_text" style="width: 42%" id="set_minuto_transmicion">
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+    </select>
+    
+    <div class="ti_setup" id="ti_activar_mandown">Tiempo de inactividad <font color="#f00">*</font></div>
+    
+    <div class="sub_ti_setup" id="place_hours_quietud">Minutos (5 a 999)* <font color="#f00">*</font></div>
+    <input type="number" data-role="none" class="input_text" id="set_minutos_quietud" onchange="minimo_max_inactividad()" >
+    
+    <div class="ti_setup" id="ti_emergency_phone">Emergency Phone Number<font color="#f00">*</font></div>
+    <input type="number" id="set_telefono_emergencia" data-role="none" class="input_text">
+
+    <div class="ti_setup" id="ti_sms">Emergency SMS Number<font color="#f00">*</font></div>
+    <input type="number" id="set_sms_emergencia" data-role="none" class="input_text">
+    
+    <table width="100%">
+    	<tr>
+        	<td><div class="ti_setup" id="ti_activar_podometro" style="margin-top: 0px;">Activar Podómetro</div></td>
+            <td width="60">
+            	<input type="checkbox" id="set_activar_podometro" data-role="none" class="input_text" style="margin-top: 5px; margin-bottom: 0px;height: 17px;">
+            </td>
+        </tr>
+    </table>
+    
+    <table width="100%">
+    	<tr>
+        	<td><div class="ti_setup" id="ti_activar_mandown_label" style="margin-top: 0px;">Detectar Inactividad</div></td>
+            <td width="60">
+            	<input type="checkbox" id="set_activar_acelerometro" data-role="none" class="input_text" style="margin-top: 5px; margin-bottom: 0px;height: 17px;">
+            </td>
+        </tr>
+    </table>
+    
+    <div id="podometro_disponible_alert" style="padding: 9px; background-color: #F44336; margin: 21px; margin-top: 5px; margin-bottom: 5px; color: #fff; font-size: 13px;">
+    	El podometro no está disponible para este dispositivo
+    </div>
+    
+    <div id="acelerometro_disponible_alert" style="padding: 9px; background-color: #F44336; margin: 21px; margin-top: 5px; margin-bottom: 5px; color: #fff; font-size: 13px; display:none">
+    	El acelerometro no está disponible para este dispositivo
+    </div>
+   
+</div>
+
+<div>
+    <input type="button" data-role="none" value="Save" class="bt_verde bt_save" onclick="Guardar_Configuracion();" style="width: 90%;">
+    <input type="button" data-role="none" value="Cancel" class="bt_rojo bt_cancel" onclick="Validaciones();" style="width: 90%;">
+</div>

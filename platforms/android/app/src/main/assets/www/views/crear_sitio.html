@@ -1,0 +1,19 @@
+<!-- Cabecera -->
+<div class="cabecera">
+	<table width="100%">
+		<tr>
+			<td width="50"><img src="img/menu.png" width="40" style="padding: 7px;" onclick="VerMenuLateral()"></td>
+			<td align="center" style="padding-right: 30px;" id="ti_crear_sitio">Created Site</td>
+		</tr>
+	</table>
+</div>
+
+<div align="center" style="margin-top: 40px; margin-bottom: 20px;">
+	<div class="ti_setup"><span id="nombre_sitio_conf">Site Name</span> <font color="#f00">*</font></div>
+	<input type="text" id="new_site" data-role="none" class="input_text">   
+</div>
+
+<div>
+	<input type="button" data-role="none" value="Save " class="bt_verde bt_save" onclick="Guardar_Sitio();" style="width: 90%;">
+	<input type="button" data-role="none" value="Cancel  " class="bt_rojo bt_cancelar" onclick="Ir_Home();" style="width: 90%;">
+</div>
