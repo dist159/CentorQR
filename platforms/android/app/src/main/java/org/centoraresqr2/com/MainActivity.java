@@ -17,7 +17,7 @@
        under the License.
  */
 
-package org.centoraresqr.com;
+package org.centoraresqr2.com;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

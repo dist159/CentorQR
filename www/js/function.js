@@ -27,6 +27,19 @@ function Validaciones(){
 				set_key_supervisor = localStorage.getItem("set_key_supervisor");
 				if(set_key_supervisor == "" || set_key_supervisor == null){
 					window.location = "#SETUP"; 
+					window.plugins.gdrive.estadoSesion(
+						function(success) {
+							console.log("Si esta iniciado: "+success)
+							$("#buttonCerrarSesion").show()  
+							$("#buttonIniciarSesion").hide()  
+							calStorage.setItem("sesionActiva", "si");
+						},
+						function(error) {
+							console.log("No esta iniciado: "+error)
+							$("#buttonCerrarSesion").hide()  
+							$("#buttonIniciarSesion").show()  
+							calStorage.setItem("sesionActiva", "no");
+					});
 					
 				}
 				else{
@@ -60,8 +73,11 @@ function Seleccionar_Idioma(){
 //GUARDAR CONFIGURACION SETUP
 function Guardar_Configuracion(){
     set_key_supervisor = $("#set_key_supervisor").val();
-    set_mail_1 = $("#set_mail_1").val();
-    set_mail_2 = $("#set_mail_2").val();
+    //set_mail_1 = $("#set_mail_1").val();
+	//set_mail_2 = $("#set_mail_2").val();
+	set_mail_1 = "centor@centor.com";
+	set_mail_2 = "centor@centor.com";
+	
     set_hora_transmicion = $("#set_hora_transmicion").val();
     set_minuto_transmicion = $("#set_minuto_transmicion").val();
     set_telefono_emergencia = $("#set_telefono_emergencia").val();
@@ -138,6 +154,7 @@ function Cerrar_Sesion_Guarda(){
 
 //OCULTAR POP UP VALIDAR KEY SUPERVIDOR
 function Ocultar_PopUpValidarKey(){
+	$("#key_supervisor").val("");
     $("#PopUpValidarKey").hide();
 }
 
@@ -335,12 +352,14 @@ function Obtener_mi_ubicacion(){
 //PERMISOS SMS
 function Permiso_SMS(){
 
+
 	var success = function (hasPermission) { 
 		if (!hasPermission) {
 			sms.requestPermission(function() {
 					sms.send(number, message, options, successSend, error);
                     //console.log('[OK] Permission accepted')
                 }, function(error) {
+					console.log("no dejo permiso::" + error)
                     $("#PopUp").show();
 					$("#parrafo_info").html('<img src="img/icono_advertencia_amarillo.png" width="30"/><br>');
 					$("#parrafo_info").append(alertasText['alert_sin_smsm']+'<br>');
@@ -539,13 +558,50 @@ function clickedUploadFile(event) {
 	var resultElement = document.getElementsByClassName('drive-result')[0];
 	resultElement.innerHTML = "Uploading file…";
 
-	window.plugins.gdrive.uploadFile(JSON.stringify(event), appDirectory,
+	window.plugins.gdrive.uploadFile(JSON.stringify(event), appDirectory,null,
 		function(success) {
+			localStorage.setItem("sesionActiva", "si");
 			resultElement.innerHTML = "Upload success: <br><pre>" + JSON.stringify(success) + "</pre>";
 		},
 		function(error) {
-			resultElement.innerHTML = "Upload error: <br><pre>" + JSON.stringify(success) + "</pre>";
+			resultElement.innerHTML = "Upload error: <br><pre>" + JSON.stringify(error) + "</pre>";
 	});
 }
 
+function logOut(){
+
+	window.plugins.gdrive.requestSync(false,
+	function (res) {
+		console.log("sesion serrada: "+res);
+		//alert(res);
+		localStorage.setItem("sesionActiva", "no");
+
+			$("#buttonCerrarSesion").hide()  
+		$("#buttonIniciarSesion").show()  
+
+	},
+	function (err) {
+		console.log(err);
+		console.log("La sesion no se pudo cerrada: "+err);
+	}
+	);
+}
+
+function logIn(){
+
+	window.plugins.gdrive.requestSync(true,
+	function (res) {
+		console.log("sesion iniciada: "+res);
+		//alert(res);
+		localStorage.setItem("sesionActiva", "si");
+
+		$("#buttonCerrarSesion").show()  
+		$("#buttonIniciarSesion").hide()  
+
+	},
+	function (err) {
+		console.log(err);
+	}
+	);
+}
 

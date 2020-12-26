@@ -5,8 +5,8 @@ GoogleDrive.prototype.downloadFile = function (destinationURL,fileid,successCall
     cordova.exec(successCallback, errorCallback, "GoogleDrive", "downloadFile", [destinationURL,fileid]);
 };
 
-GoogleDrive.prototype.uploadFile = function (fpath,appfolder,successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "GoogleDrive", "uploadFile", [fpath,appfolder]);
+GoogleDrive.prototype.uploadFile = function (fpath,appfolder,imagenes,successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, "GoogleDrive", "uploadFile", [fpath,appfolder,imagenes]);
 };
 
 GoogleDrive.prototype.fileList = function (appfolder,successCallback, errorCallback) {
@@ -19,6 +19,10 @@ GoogleDrive.prototype.deleteFile = function (fileid,appfolder,successCallback, e
 
 GoogleDrive.prototype.requestSync = function(returnFiles,successCallback,errorCallback){
     cordova.exec(successCallback,errorCallback,"GoogleDrive","requestSync",[returnFiles]);
+};
+
+GoogleDrive.prototype.estadoSesion = function(successCallback,errorCallback){
+    cordova.exec(successCallback,errorCallback,"GoogleDrive","estadoSesion");
 };
 
 GoogleDrive.install = function () {

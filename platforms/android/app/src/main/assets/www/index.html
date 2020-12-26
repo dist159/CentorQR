@@ -125,8 +125,9 @@
                 </div>
                 <div style="text-align: left; margin-top: 15px;" onclick="Eliminar_Sitio()" id="bt_delete_site">Delete
                     Site</div>
-                <div style="text-align: left; margin-top: 15px;" onclick="Exportar_Sitio()" id="bt_export_site">Export
+                   <!--<div style="text-align: left; margin-top: 15px;" onclick="Exportar_Sitio()" id="bt_export_site">Export
                     Site</div>
+                    --> 
             </div>
 
             <div id="cont_popup_Editar_Ronda" style="position: relative; z-index: 2 ">
@@ -472,6 +473,25 @@
         </div>
     </div>
 
+            <!-- LISTA CAIDAS -->
+    <!-- LISTA CAIDAS -->
+    <div data-role="page" id="CAIDAS" class="page" align="center">
+        <div id="CAIDAS">
+            <div class="cabecera">
+                <table width="100%">
+                    <tr>
+                        <td width="50"><img src="img/menu.png" width="40" style="padding: 7px;"
+                                onclick="VerMenuLateral()"></td>
+                        <td align="center" style="padding-right: 30px;">FALLMAN</td>
+                    </tr>
+                </table>
+            </div>
+            <input type="hidden" id="tour_selected">
+            <div id="cont_puntos_listaA">
+            </div>
+        </div>
+    </div>
+
     <!-- REPORTE-->
     <!-- REPORTE -->
     <div data-role="page" id="REPORTE" class="page" align="center">
@@ -560,35 +580,10 @@
             console.log("Inicio de app");
 
 
+            /** Descomentar para volver a monitorear caidas*/
+         //   monitorearCaidas();
 
-
-            window.addEventListener("devicemotion", function (event) {
-                // Process event.acceleration, event.accelerationIncludingGravity,
-                // event.rotationRate and event.interval
-              
-              //  console.log("me estoy moviedno X "+ event.accelerationIncludingGravity.x)
-              //  console.log("me estoy moviedno Y "+ event.accelerationIncludingGravity.y)
-              //  console.log("me estoy moviedno Z "+ event.accelerationIncludingGravity.z)
-let index=0;
-let accelValuesX={}
-let accelValuesY={}
-let accelValuesZ={}
-                accelValuesX[index] = event.acceleration.x;
-            accelValuesY[index] = event.acceleration.y;
-            accelValuesZ[index] = event.acceleration.z;
-
-         let   rootSquare=Math.sqrt(Math.pow(event.accelerationIncludingGravity.x,2)+Math.pow(event.accelerationIncludingGravity.y,2)+Math.pow(event.accelerationIncludingGravity.z,2));
-            if(rootSquare<0.2)
-            {
-
-          //  Toast.makeText(this, "Fall detected", Toast.LENGTH_SHORT).show();
-
-          console.log("Caida detectada")
-          alert("Alerta se detecto una caida")
-
-            }
-
-            }, true);
+           
 
             /*
             window.plugins.gdrive.uploadFile("archivo1.cvs","123,123,123",
@@ -600,16 +595,16 @@ let accelValuesZ={}
                     console.log(err);
                 }
             );*/
-          /*  window.plugins.gdrive.downloadFile("archivo1.cvs",
-                function (res) {
-                    console.log(res);
-                    alert(res);
-                },
-                function (err) {
-                    console.log(err);
-                }
-                );
-            */
+            /*  window.plugins.gdrive.downloadFile("archivo1.cvs",
+                  function (res) {
+                      console.log(res);
+                      alert(res);
+                  },
+                  function (err) {
+                      console.log(err);
+                  }
+                  );
+              */
 
             //StatusBar.hide();
             uuid = device.uuid;

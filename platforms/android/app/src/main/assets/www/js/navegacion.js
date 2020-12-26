@@ -138,6 +138,22 @@ function Ir_Setup(){
 	
 	var stateObj = { page: "home" };
 	window.history.replaceState(stateObj, "home", "#HOME");
+
+
+
+	window.plugins.gdrive.estadoSesion(
+		function(success) {
+			console.log("Si esta iniciado: "+success)
+			$("#buttonCerrarSesion").show()  
+			$("#buttonIniciarSesion").hide()  
+			calStorage.setItem("sesionActiva", "si");
+		},
+		function(error) {
+			console.log("No esta iniciado: "+error)
+			$("#buttonCerrarSesion").hide()  
+			$("#buttonIniciarSesion").show()  
+			calStorage.setItem("sesionActiva", "no");
+	});
 	
 	
 }
@@ -176,6 +192,14 @@ function Ir_Reporte(){
 //IR CARGAR TOUR
 function Ir_Cargar_Tour(){
 	window.location = "#CARGAR_TOURS"; 
+	sesionActiva = localStorage.getItem("sesionActiva");
+	if(sesionActiva=="si"){
+		$("#buttonCerrarSesion").show(); 
+	}else{
+		$("#buttonCerrarSesion").hide(); 
+		$("#buttonCerrarSesion").show(); 
+	}
+
 }
 
 //IR ENVIAR FOTO
@@ -196,6 +220,11 @@ var link_validar = "";
 function ver_validar_key(val){
 	$("#PopUpValidarKey").show();
 	link_validar = val;
+
+	//sesionActiva = localStorage.getItem("sesionActiva")
+
+
+
 
 }
 
@@ -229,9 +258,15 @@ function Validar_Key(){
 		}
 
 		if(link_validar == 3){ //CARGAR TOUR
-			Ir_Cargar_Tour();
+			//Ir_Cargar_Tour();
 			Ocultar_PopUpValidarKey();
-		}
+			
+			$("#PopUp").show();
+        		$("#parrafo_info").html('<img src="img/icono_advertencia_amarillo.png" width="30"/><br>');
+				$("#parrafo_info").append( alertasText["sobrescribirBase"]+ "<br>");
+				$("#parrafo_info").append('<input type="button" data-role="none" value="'+idiomaSeleccionado['bt_cargar_d'] +'" class="bt_verde" onclick="cargarTodaLaBaseDeDatos();Ocultar_PopUp()" style="width: 80%; margin-bottom: 5px;"><br><input type="button" data-role="none" value="' +
+				idiomaSeleccionado['bt_cancel'] + '" class="bt_verde" onclick="Ocultar_PopUp();" style="width: 80%; margin-bottom: 5px;">'); 
+			}
 
 		if(link_validar == 4){ //IR SITIOS
 			Ir_Sitios();
@@ -247,6 +282,16 @@ function Validar_Key(){
 			//Validar_Transmision_Tour(1);
 			//Ocultar_PopUpValidarKey();
 		}
+
+		if(link_validar == 6){ //CARGAR TOUR
+
+			Ocultar_PopUpValidarKey();
+			$("#PopUp").show();
+        		$("#parrafo_info").html('<img src="img/icono_advertencia_amarillo.png" width="30"/><br>');
+				$("#parrafo_info").append( alertasText["sobrescribirBaseEnDrive"]+ "<br>");
+				$("#parrafo_info").append('<input type="button" data-role="none" value="'+idiomaSeleccionado['bt_subir_drive'] +'" class="bt_verde" onclick="Exportar_Todos_Los_Sitios();Ocultar_PopUp()" style="width: 80%; margin-bottom: 5px;"><br><input type="button" data-role="none" value="' +
+				idiomaSeleccionado['bt_cancel'] + '" class="bt_verde" onclick="Ocultar_PopUp();" style="width: 80%; margin-bottom: 5px;">'); 
+			}
 
 		$("#key_supervisor").val("");
 

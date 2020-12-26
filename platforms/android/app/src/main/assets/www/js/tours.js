@@ -78,6 +78,7 @@ function Detalle_Tour(){
 function Ir_Sitios(){
     window.location = "#SITIOS"; 
     lista_sitios = localStorage.getItem("lista_sitios");
+    sesionActiva = localStorage.getItem("sesionActiva");
 
     if(lista_sitios == "" || lista_sitios == null){
         $("#cont_sitios_lista").html('<div style="padding: 15px; color: #ffffff; background-color: #03A9F4;">'+idiomaSeleccionado["alert_no_sitio_lista"]+'</div>');
@@ -89,8 +90,11 @@ function Ir_Sitios(){
         lista = "";
 
         $("#cont_sitios_lista").html(lista);
-        lista += '<input type="button" data-role="none" value="Subir todos los sitios a Drive" class="bt_verde bt_cargar_d" style="width: 89%;" onclick="Exportar_Todos_Los_Sitios()">';
+      // lista += '<input type="button" data-role="none" value="Subir todos los sitios a Drive" class="bt_verde bt_subir_drive" style="width: 89%;" onclick="Exportar_Todos_Los_Sitios()">';
 
+        if(sesionActiva=="si"){
+          //  lista += '<input id="buttonCerrarSesion" type="button" class="bt_azul bt_cerrar_sesion"  data-role="none" value="Cerrar sesion"  style="width: 89%;" onclick="logOut()">';
+        }
         for (i = 0; i < filas.length; i++) { 
 			n_site = filas[i].replace("'", "`");
 
@@ -119,6 +123,7 @@ function Ir_Tour(val){
         $("#cont_tour_lista").html('<div style="padding: 15px; color: #ffffff; background-color: #03A9F4;">'+idiomaSeleccionado["sin_rondas_gonf"]+'</div>');
     }
     else{
+        
         filas = lista_tours.split(";");
         lista = "";
 
@@ -386,7 +391,7 @@ function Transmitir_Base_Datos(){
     
     $("#parrafo_info").append('<input type="button" data-role="none" value="Ok" class="bt_verde" onclick="Ocultar_PopUp()">');
     */
-    ver_validar_key(4);
+    ver_validar_key(6);
 }
 
 

@@ -8,46 +8,52 @@
   },
   "installed_plugins": {
     "cordova-clipboard": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
+      "PACKAGE_NAME": "org.centoraresqr2.com"
     },
     "cordova-plugin-background-mode": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
+      "PACKAGE_NAME": "org.centoraresqr2.com"
     },
     "cordova-plugin-camera": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
+      "PACKAGE_NAME": "org.centoraresqr2.com"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
+      "PACKAGE_NAME": "org.centoraresqr2.com"
     },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
-    },
-    "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
-    },
-    "cordova-plugin-pedometer": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
-    },
-    "cordova-plugin-qrscanner": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
-    },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
-    },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
-    },
-    "cordova-sms-plugin": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
-    },
-    "cordova-plugin-jc-googledrive": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
+    "cordova-plugin-device-motion": {
+      "PACKAGE_NAME": "org.centoraresqr2.com"
     },
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "org.centoraresqr.com"
+      "PACKAGE_NAME": "org.centoraresqr2.com"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "org.centoraresqr2.com"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "org.centoraresqr2.com"
+    },
+    "cordova-plugin-jc-googledrive": {
+      "PACKAGE_NAME": "org.centoraresqr2.com"
+    },
+    "cordova-plugin-pedometer": {
+      "PACKAGE_NAME": "org.centoraresqr2.com"
+    },
+    "cordova-plugin-qrscanner": {
+      "PACKAGE_NAME": "org.centoraresqr2.com"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "org.centoraresqr2.com"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "org.centoraresqr2.com"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "org.centoraresqr2.com"
+    },
+    "cordova-sms-plugin": {
+      "PACKAGE_NAME": "org.centoraresqr2.com"
+    },
+    "cordova-plugin-save-image": {
+      "PACKAGE_NAME": "org.centoraresqr2.com"
     }
   },
   "dependent_plugins": {}

@@ -118,5 +118,21 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-device-motion": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-device-motion"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-save-image": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-save-image@^0.3.0"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

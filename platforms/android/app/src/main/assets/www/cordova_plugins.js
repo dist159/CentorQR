@@ -58,74 +58,19 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-geolocation.geolocation",
-      "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
-      "pluginId": "cordova-plugin-geolocation",
+      "id": "cordova-plugin-device-motion.Acceleration",
+      "file": "plugins/cordova-plugin-device-motion/www/Acceleration.js",
+      "pluginId": "cordova-plugin-device-motion",
       "clobbers": [
-        "navigator.geolocation"
+        "Acceleration"
       ]
     },
     {
-      "id": "cordova-plugin-geolocation.PositionError",
-      "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
-      "pluginId": "cordova-plugin-geolocation",
-      "runs": true
-    },
-    {
-      "id": "cordova-plugin-inappbrowser.inappbrowser",
-      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-      "pluginId": "cordova-plugin-inappbrowser",
+      "id": "cordova-plugin-device-motion.accelerometer",
+      "file": "plugins/cordova-plugin-device-motion/www/accelerometer.js",
+      "pluginId": "cordova-plugin-device-motion",
       "clobbers": [
-        "cordova.InAppBrowser.open",
-        "window.open"
-      ]
-    },
-    {
-      "id": "cordova-plugin-pedometer.Pedometer",
-      "file": "plugins/cordova-plugin-pedometer/www/pedometer.js",
-      "pluginId": "cordova-plugin-pedometer",
-      "clobbers": [
-        "pedometer"
-      ]
-    },
-    {
-      "id": "cordova-plugin-qrscanner.QRScanner",
-      "file": "plugins/cordova-plugin-qrscanner/www/www.min.js",
-      "pluginId": "cordova-plugin-qrscanner",
-      "clobbers": [
-        "QRScanner"
-      ]
-    },
-    {
-      "id": "cordova-plugin-splashscreen.SplashScreen",
-      "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-      "pluginId": "cordova-plugin-splashscreen",
-      "clobbers": [
-        "navigator.splashscreen"
-      ]
-    },
-    {
-      "id": "cordova-plugin-statusbar.statusbar",
-      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-      "pluginId": "cordova-plugin-statusbar",
-      "clobbers": [
-        "window.StatusBar"
-      ]
-    },
-    {
-      "id": "cordova-sms-plugin.Sms",
-      "file": "plugins/cordova-sms-plugin/www/sms.js",
-      "pluginId": "cordova-sms-plugin",
-      "clobbers": [
-        "window.sms"
-      ]
-    },
-    {
-      "id": "cordova-plugin-jc-googledrive.GoogleDrive",
-      "file": "plugins/cordova-plugin-jc-googledrive/www/googleDrive.js",
-      "pluginId": "cordova-plugin-jc-googledrive",
-      "clobbers": [
-        "window.plugins.gdrive"
+        "navigator.accelerometer"
       ]
     },
     {
@@ -302,19 +247,82 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "runs": true
     },
     {
-      "id": "cordova-plugin-device-motion.Acceleration",
-      "file": "plugins/cordova-plugin-device-motion/www/Acceleration.js",
-      "pluginId": "cordova-plugin-device-motion",
+      "id": "cordova-plugin-geolocation.geolocation",
+      "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
+      "pluginId": "cordova-plugin-geolocation",
       "clobbers": [
-        "Acceleration"
+        "navigator.geolocation"
       ]
     },
     {
-      "id": "cordova-plugin-device-motion.accelerometer",
-      "file": "plugins/cordova-plugin-device-motion/www/accelerometer.js",
-      "pluginId": "cordova-plugin-device-motion",
+      "id": "cordova-plugin-geolocation.PositionError",
+      "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "runs": true
+    },
+    {
+      "id": "cordova-plugin-inappbrowser.inappbrowser",
+      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+      "pluginId": "cordova-plugin-inappbrowser",
       "clobbers": [
-        "navigator.accelerometer"
+        "cordova.InAppBrowser.open",
+        "window.open"
+      ]
+    },
+    {
+      "id": "cordova-plugin-jc-googledrive.GoogleDrive",
+      "file": "plugins/cordova-plugin-jc-googledrive/www/googleDrive.js",
+      "pluginId": "cordova-plugin-jc-googledrive",
+      "clobbers": [
+        "window.plugins.gdrive"
+      ]
+    },
+    {
+      "id": "cordova-plugin-pedometer.Pedometer",
+      "file": "plugins/cordova-plugin-pedometer/www/pedometer.js",
+      "pluginId": "cordova-plugin-pedometer",
+      "clobbers": [
+        "pedometer"
+      ]
+    },
+    {
+      "id": "cordova-plugin-qrscanner.QRScanner",
+      "file": "plugins/cordova-plugin-qrscanner/www/www.min.js",
+      "pluginId": "cordova-plugin-qrscanner",
+      "clobbers": [
+        "QRScanner"
+      ]
+    },
+    {
+      "id": "cordova-plugin-splashscreen.SplashScreen",
+      "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+      "pluginId": "cordova-plugin-splashscreen",
+      "clobbers": [
+        "navigator.splashscreen"
+      ]
+    },
+    {
+      "id": "cordova-plugin-statusbar.statusbar",
+      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+      "pluginId": "cordova-plugin-statusbar",
+      "clobbers": [
+        "window.StatusBar"
+      ]
+    },
+    {
+      "id": "cordova-sms-plugin.Sms",
+      "file": "plugins/cordova-sms-plugin/www/sms.js",
+      "pluginId": "cordova-sms-plugin",
+      "clobbers": [
+        "window.sms"
+      ]
+    },
+    {
+      "id": "cordova-plugin-save-image.SaveImage",
+      "file": "plugins/cordova-plugin-save-image/www/SaveImage.js",
+      "pluginId": "cordova-plugin-save-image",
+      "clobbers": [
+        "cordova.plugins.imagesaver"
       ]
     }
   ];
@@ -323,16 +331,17 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-background-mode": "0.7.3",
     "cordova-plugin-camera": "4.0.3",
+    "cordova-plugin-device-motion": "2.0.1",
+    "cordova-plugin-file": "6.0.2",
     "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-inappbrowser": "3.0.0",
+    "cordova-plugin-jc-googledrive": "1.1.0",
     "cordova-plugin-pedometer": "0.4.1",
     "cordova-plugin-qrscanner": "3.0.1",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-sms-plugin": "1.0.0",
-    "cordova-plugin-jc-googledrive": "1.1.0",
-    "cordova-plugin-file": "6.0.2",
-    "cordova-plugin-device-motion": "2.0.1"
+    "cordova-plugin-save-image": "0.3.0"
   };
 });

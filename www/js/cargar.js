@@ -167,9 +167,11 @@ function Cargar_Base_DatosDrive() {
             console.log(res);
             //alert(res);
             //DATOS DEL REGISTRO
-
+            $("#Preloader").hide();
         },
         function (err) {
+            $("#Preloader").hide();
+            localStorage.setItem("sesionActiva", "si");
             console.log(err);
             console.log("dio error");
             console.log("la info es:" + err)
@@ -237,7 +239,7 @@ function Cargar_Base_DatosDrive() {
                 }
 
                 localStorage.setItem("lista_puntos", nueva_lista_puntos); //CONFIGURAMOS 1 SITIO
-
+                $("#Preloader").hide();
                 $("#PopUp").show();
                 $("#parrafo_info").html('<img src="img/icono_advertencia_amarillo.png" width="30"/><br>');
                 $("#parrafo_info").append(alertasText['alert_carga_archivo'] + "<br>");
@@ -251,6 +253,7 @@ function Cargar_Base_DatosDrive() {
             }
 
             else {
+                $("#Preloader").hide();
                 $("#PopUp").show();
                 $("#parrafo_info").html('<img src="img/icono_advertencia_amarillo.png" width="30"/><br>');
                 $("#parrafo_info").append(alertasText['alert_incorrecto_archivo'] + "<br>");
@@ -263,16 +266,31 @@ function Cargar_Base_DatosDrive() {
 
 function cargarTodaLaBaseDeDatos() {
     console.log("holi");
-
+    $("#Preloader").show();
     window.plugins.gdrive.downloadFile("1p0HZsyMOsACRomJsFzn1eEcSSJLoO6Z9",
         function (res) {
             console.log(res);
             //alert(res);
             //DATOS DEL REGISTRO
-
+            $("#Preloader").hide();
         },
         function (err) {
+            $("#Preloader").hide();
+            console.log("La res: "+err);
+            if(err=="No files found"){
+                alert(err);
+                console.log(err);
+                return;
+            }
+            if(err=="Error, check internet connection"){
 
+                $("#PopUp").show();
+                $("#parrafo_info").html('<img src="img/icono_advertencia_amarillo.png" width="30"/><br>');
+                $("#parrafo_info").append( err+ "<br>");
+                $("#parrafo_info").append('<input type="button" data-role="none" value="Ok" class="bt_verde" onclick="Ocultar_PopUp()">');  
+                return;
+            }
+            localStorage.setItem("sesionActiva", "si");
             localStorage.setItem("lista_sitios", "");
             localStorage.setItem("lista_tours","");
             localStorage.setItem("lista_puntos", "");

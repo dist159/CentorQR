@@ -78,6 +78,15 @@ import android.util.Pair;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.provider.OpenableColumns;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
+import androidx.core.content.ContextCompat;
+import android.Manifest;
+import android.content.pm.PackageManager;
+
 public class GoogleDrive extends CordovaPlugin  {
 
     private static final String TAG = "GoogleDrivePlugin";
@@ -90,12 +99,13 @@ public class GoogleDrive extends CordovaPlugin  {
     private String localFPath;
     private String name;
     private String content;
-    private boolean appFolder, listOfFiles;
+    private JSONArray  adjuntosFotos;
+    private boolean appFolder, listOfFiles,inicio;
     private CallbackContext mCallbackContext;
     private final Executor mExecutor = Executors.newSingleThreadExecutor();
     Drive driveService;
-
-
+    boolean inicialisando =false;
+    GoogleSignInAccount account;
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView){
@@ -110,20 +120,30 @@ public class GoogleDrive extends CordovaPlugin  {
                     .build();
         }
 */
-cordova.setActivityResultCallback (this);
+
+
+
+//cordova.setActivityResultCallback (this);
+
+ account = GoogleSignIn.getLastSignedInAccount(cordova.getActivity());
+
       if (mSignInClient == null) {
+      
+      /*    Log.d("DRIVE", "SI ES NULL EL PLUGIN DE INICIO");
             GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .requestScopes(new Scope( DriveScopes.DRIVE_FILE))
             .requestScopes(new Scope(DriveScopes.DRIVE_APPDATA))
             .build();
-      
-            mSignInClient = GoogleSignIn.getClient(cordova.getActivity(), options);
+    
+            mSignInClient = GoogleSignIn.getClient(cordova.getActivity(), options);*/
 
-//             Intent intent = mSignInClient.getSignInIntent();
-   cordova.getActivity().startActivityForResult(mSignInClient.getSignInIntent(), 400);
+         //   cordova.getActivity().startActivityForResult(mSignInClient.getSignInIntent(), 400);
+        }else{
+
+          //  GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(cordova.getActivity());
         }
-
+        inicialisando=true;
         Log.i(TAG,"Plugin initialized");
     }
 
@@ -140,10 +160,14 @@ cordova.setActivityResultCallback (this);
                         fileid = args.getString(0);
                        // content = args.getString(1);
 
-                        if(driveService!=null){ 
+                       if(driveService!=null && mSignInClient!=null){  
                             downloadFile(fileid);
+                            Log.d("GOOGLEDIRVE","Iniciando processo ");
                         }else{
-
+                           // if(!inicialisando){ 
+                                iniciarSesion();
+                                Log.d("GOOGLEDIRVE","Iniciando sesion ");
+                           // } 
                         }
                  
                        /* if(mGoogleApiClient.isConnected()) {
@@ -165,22 +189,34 @@ cordova.setActivityResultCallback (this);
                 public void run() {
                     try {
                         Log.d("GOOGLEDIRVE","Llamando funcion upload");
+                        Log.d("GOOGLEDIRVE","arreglo es: "+args);
                         name = args.getString(0);
                         content = args.getString(1);
 
-                        if(driveService!=null){ 
-                            uploadFile(name,content);
-                        }else{
-
+                        if(args.getJSONArray(2)!=null&&args.getJSONArray(2).length()>0){ 
+                            try {
+                                adjuntosFotos = args.getJSONArray(2);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                 
-                       /* if(mGoogleApiClient.isConnected()) {
-                            if(localFPath.trim().length()>0)
-                                uploadFile(localFPath, appFolder);
-                            else
-                                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"one of the parameters is empty"));
-                        } else
-                            mGoogleApiClient.connect();*/
+         
+                        account = GoogleSignIn.getLastSignedInAccount(cordova.getActivity());
+
+                        if(account!=null){
+                            if(driveService!=null && mSignInClient!=null){  
+                                uploadFile(name,content);
+                                Log.d("GOOGLEDIRVE","Iniciando processo ");
+                            }else{
+                                    iniciarSesion();
+                                    Log.d("GOOGLEDIRVE","Iniciando sesion ");
+                            }
+                            
+                        }else{
+                            mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"not sign in"));
+           
+                        }
+
                     }catch(JSONException ex){
                         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,ex.getLocalizedMessage()));
                     }
@@ -214,10 +250,14 @@ cordova.setActivityResultCallback (this);
                         name = args.getString(0);
                         content = args.getString(1);
 
-                        if(driveService!=null){ 
+                        if(driveService!=null && !inicialisando){ 
                             deleteFile(name,content);
+                            Log.d("GOOGLEDIRVE","Iniciando processo ");
                         }else{
-
+                          //  if(!inicialisando){ 
+                                iniciarSesion();
+                                Log.d("GOOGLEDIRVE","Iniciando sesion ");
+                           // } 
                         }
                  
                        /* if(mGoogleApiClient.isConnected()) {
@@ -238,19 +278,56 @@ cordova.setActivityResultCallback (this);
                   @Override
                   public void run() {
                       try {
-                          Log.d("GOOGLEDIRVE","Entro a la funcion");
-                          listOfFiles = args.getBoolean(0);
-                         /* if (mGoogleApiClient.isConnected())
-                              requestSync(listOfFiles);
-                          else
-                              mGoogleApiClient.connect();*/
+                          Log.d("GOOGLEDIRVE","CERRAR SESION o Iniciar Sesion");
+                          inicio = args.getBoolean(0);
+                          if(mSignInClient!=null){ 
+                              if(inicio){
+                                iniciarSesion();  
+                              }else{
+                                Log.d("GOOGLEDIRVE","CERRAndo SESION");
+                                  cerrarSesion();
+                              }
+                             
+                          }else{
+                            if(inicio){
+                              iniciarSesion();  
+                              }else{
+                                Log.d("GOOGLEDIRVE","CERRAR SESION");
+                                  cerrarSesion();
+                              }
+                          }
                       }catch (JSONException ex){
                           callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,ex.getLocalizedMessage()));
                       }
                   }
               });
               return true;
-        }
+        } else if("estadoSesion".equals(action)){
+            cordova.getThreadPool().execute(new Runnable() {
+                @Override
+                public void run() {
+          
+                        
+                        account = GoogleSignIn.getLastSignedInAccount(cordova.getActivity());
+                        Log.d("GOOGLEDIRVE","Verificando el estado de la sesion actual");
+                      if(account!=null)
+                        Log.d("GOOGLEDIRVE","account es: "+account);
+                        if(account!=null){ 
+                            iniciarSesion();  
+                            mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "OK"));
+                           
+                        }else{
+                            //iniciarSesion();  
+                            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"Not ok"));
+                        }
+                  
+                }
+            });
+            return true;
+      }
+
+
+        
         return false;
     }
 
@@ -271,21 +348,18 @@ cordova.setActivityResultCallback (this);
                    saveFile( file.getId(), fileName, fileContent)
                                     .addOnSuccessListener(fileID -> {Log.d("Siino","El archivo se guardo exitosamente"); 
                                     mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "El archivo se creo con el ID: "+fileId));
-                                 
                                 } )
                                     .addOnFailureListener(exception -> {
                                         Log.d("Siino","el erro actula es ++ "+exception);
-    
+                                        mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,""+exception));
                                     });
                }
-   
-              
            }
            Log.d("Siino","De la lista de archivos se obtivo "+fileId);
        })
        .addOnFailureListener(exception -> {
            Log.d("Siino","el erro actula es ++ "+exception);
-   
+           mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,""+exception));
        });
     }
 
@@ -297,6 +371,7 @@ cordova.setActivityResultCallback (this);
         List<File> files = fileId.getFiles();
         if (files == null || files.size() == 0) {
             System.out.println("No files found.");
+            mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "No files found"));
         } else {
             if(files.size()==1)
             for (File file : files) {
@@ -308,7 +383,7 @@ cordova.setActivityResultCallback (this);
                 })
                 .addOnFailureListener(exception -> {
                     Log.d("Siino","el erro actula es ++ "+exception);
-                    mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "exception"));
+                    mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, ""+exception));
                 });
             }
 
@@ -318,7 +393,7 @@ cordova.setActivityResultCallback (this);
     })
     .addOnFailureListener(exception -> {
         Log.d("Siino","el erro actula es ++ "+exception);
-
+        mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,exception.getLocalizedMessage()));
     });
     
   
@@ -369,6 +444,7 @@ cordova.setActivityResultCallback (this);
 
     private void deleteFileA(String fileid){
         try {
+            if(driveService!=null)
             driveService.files().delete(fileid).execute();
         } catch (IOException e) {
             Log.d("Err","error: "+e);
@@ -391,26 +467,51 @@ cordova.setActivityResultCallback (this);
             }
         });*/
     }
+public void iniciarSesion(){
+    cordova.setActivityResultCallback (this);
+    inicialisando=false;
+    GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+    .requestEmail()
+    .requestScopes(new Scope( DriveScopes.DRIVE_FILE))
+    .requestScopes(new Scope(DriveScopes.DRIVE_APPDATA))
+    .build();
+
+    mSignInClient = GoogleSignIn.getClient(cordova.getActivity(), options);
+
+//             Intent intent = mSignInClient.getSignInIntent();
+cordova.getActivity().startActivityForResult(mSignInClient.getSignInIntent(), 400);
+}
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d("tag","Si entro pero acacacaca");
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("tag","Si entro pero acacacaca");
+        Log.d("tag","codigo A_1_2 es: "+REQUEST_CODE_RESOLUTION +" -- "+requestCode+" codigo A_1_2 es: "+resultCode +" -- "+ RESULT_OK);
         if (requestCode == REQUEST_CODE_RESOLUTION && resultCode == RESULT_OK) {
            // mGoogleApiClient.connect();
+         
             try {
                 Log.d("Sii","Si lo esta intentado");
                 manejoInicio(data);
+                
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.d("Siino","el erro actula es "+e);
+                mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,e.getLocalizedMessage()));
             } catch (GeneralSecurityException e) {
                 e.printStackTrace();
                 Log.d("Siino","el erro actula es "+e);
+                mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,e.getLocalizedMessage()));
             }
         } else {
-            mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"user cancelled authorization"));
+            Log.d("Siino","el erro actula es el usuario cancelototo");
+            if(mAction.equals("downloadFile")){
+                mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Error, check internet connection"));
+            }else{
+                mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"Error, check internet connection"));
+            }
+            
         }
     }
 
@@ -431,7 +532,7 @@ cordova.setActivityResultCallback (this);
                         .setApplicationName("Cencor test")
                         .build();
                         Log.d("memory","La memoria actual es :"+ Environment.getDataDirectory());
-                        
+                        inicialisando =false;
                         Log.i(TAG, "API client connected.");
                         if(mAction.equals("downloadFile")){
                             downloadFile(fileid);
@@ -442,7 +543,14 @@ cordova.setActivityResultCallback (this);
                         } else if(mAction.equals("deleteFile")){
                             deleteFile(name,content);
                         } else if (mAction.equals("requestSync")){
-                            requestSync(listOfFiles);
+                            //requestSync(listOfFiles);
+                            if(inicio){
+                                mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "inicio de sesion exitoso"));
+                                //iniciarSesion();  
+                              }else{
+                                  cerrarSesion();
+                              }
+                          
                         } else if(mAction.equals("borrarYsubir")){
                            // borrarYsubir(name,content);
                         }
@@ -483,7 +591,7 @@ cordova.setActivityResultCallback (this);
                         .setParents(Collections.singletonList("root"))
                         .setMimeType("text/plain")
                         .setName("Untitled file");
-    
+              
                 File googleFile = driveService.files().create(metadata).execute();
                 if (googleFile == null) {
                     throw new IOException("Null result when requesting file creation.");
@@ -491,6 +599,35 @@ cordova.setActivityResultCallback (this);
                 return googleFile.getId();
             });
         }
+
+        public Task<String> createFileImage(String filepatha,String name) {
+            
+            return Tasks.call(mExecutor, () -> {
+                Log.d("GOOGLEDIRVE","Creando el archivo correspondiete con el nombre");
+                if (ContextCompat.checkSelfPermission(cordova.getActivity(),
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+                    Log.d("GOOGLEDIRVE","NO HAY PERMISO");
+                }else{
+                    Log.d("GOOGLEDIRVE","SI HAY PERMISO");
+                }
+
+                File fileMetadata = new File();
+                fileMetadata.setName(name);
+                java.io.File filePath = new java.io.File(filepatha);
+                FileContent mediaContent = new FileContent("image/jpeg", filePath);
+                File googleFile = driveService.files().create(fileMetadata, mediaContent)
+                    .setFields("id")
+                    .execute();
+        
+                if (googleFile == null) {
+                    throw new IOException("Null result when requesting file creation.");
+                }
+                return googleFile.getId();
+           
+            });
+        }
+
 
 
 
@@ -512,7 +649,26 @@ cordova.setActivityResultCallback (this);
         });
     }
 
-        
+        /**
+     * Updates the file identified by {@code fileId} with the given {@code name} and {@code
+     * content}.
+     */
+    public Task<Void> saveImage(String fileId, String name, String content) {
+        return Tasks.call(mExecutor, () -> {
+            // Create a File containing any metadata changes.
+            File metadata = new File().setName(name);
+            // Convert content to an AbstractInputStreamContent instance.
+            byte[] decodedString = Base64.decode(content, Base64.DEFAULT);
+           // ByteArrayContent contentStream = ByteArrayContent.fromString("image/jpeg", decodedString);
+           // ByteArrayContent decodedString = Base64.decode(content, Base64.DEFAULT);
+         //   Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            // Update the metadata and contents.
+          //  driveService.files().update(fileId, metadata, contentStream).execute();
+            return null;
+        });
+    }
+
+      
 
         public Task<String> UpdateFileAAA(Drive mDriveService) {
             return Tasks.call(mExecutor, () -> {
@@ -540,24 +696,86 @@ cordova.setActivityResultCallback (this);
                 });
         }
 
-
+int numeroActual=0;
         public void uploadFile(String fileName, String fileContent) {
+            if(adjuntosFotos!=null&&adjuntosFotos.length()>0){
+                Log.d("GOOGLEDIRVE","Si hay adjuntos: "+ adjuntosFotos.length());
+               numeroActual=0;
+                for(int i=0;i<adjuntosFotos.length();i++){
+
+                
+                    try {
+                    createFileImage(adjuntosFotos.getString(i),fileName+"-"+i+".jpg")
+                    .addOnSuccessListener(fileIdo ->{
+                        Log.d("GOOGLEDIRVE","ID !-!-!-!-!-!-!-!-!-!-! "+ fileIdo);
+                        numeroActual++;
+                        if(numeroActual==adjuntosFotos.length()){
+                            Log.d("GOOGLEDIRVE","Iniciando subida");
+                            createFile()
+                                    .addOnSuccessListener(fileId ->{
+                                        saveFile(fileId, fileName+".csv", fileContent)
+                                                .addOnSuccessListener(fileID -> {Log.d("Siino","El archivo se guardo exitosamente"); 
+                                                mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "El archivo se creo con el ID: "+fileId));
+                                             
+                                            } )
+                                                .addOnFailureListener(exception -> {
+                                                    Log.d("Siino","el erro actula es ++ "+exception);
+                                                    mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,exception.getLocalizedMessage()));
+                                                });
+                                    })
+                                    .addOnFailureListener(exception -> {
+                                        Log.d("Siino","el erro actula es ++ "+exception);
+                                        mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,exception.getLocalizedMessage()));
+                                    });
+                        }
+                        
+                        /*try {
+                    
+                            
+                        /*  saveImage(fileId, "example.jpeg", adjuntosFotos.getString(0))
+                            .addOnSuccessListener(fileID -> {Log.d("Siino","El archivo se guardo exitosamente"); 
+                            mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "El archivo se creo con el ID: "+fileId));
+                        
+                            })
+                            .addOnFailureListener(exception -> {
+                                Log.d("Siino","el erro actula es ++ "+exception);
+
+                            });*/
+                    /*  } catch (JSONException e) {
+                            e.printStackTrace();
+                        }*/
+                    
+                    })
+                    .addOnFailureListener(exception -> {
+                        Log.d("Siino","el erro actula es ++ "+exception);
+
+                    });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }else{
+                Log.d("GOOGLEDIRVE","Iniciando subida");
                 createFile()
                         .addOnSuccessListener(fileId ->{
-                            saveFile(fileId, fileName, fileContent)
+                            saveFile(fileId, fileName+".csv", fileContent)
                                     .addOnSuccessListener(fileID -> {Log.d("Siino","El archivo se guardo exitosamente"); 
                                     mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "El archivo se creo con el ID: "+fileId));
                                  
                                 } )
                                     .addOnFailureListener(exception -> {
-                                        Log.d("Siino","el erro actula es ++ "+exception);
-    
+                                        Log.d("Siino","el erro actula es ++ ll "+exception);
+                                        mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,exception.getLocalizedMessage()));
                                     });
                         })
                         .addOnFailureListener(exception -> {
-                            Log.d("Siino","el erro actula es ++ "+exception);
-    
+                            Log.d("Siino","el erro actula es ++ xx "+exception);
+                            mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,exception.getLocalizedMessage()));
                         });
+            }
+         
+            
+        
            
         }
 
@@ -596,11 +814,15 @@ cordova.setActivityResultCallback (this);
      * Developer's Console</a> and be submitted to Google for verification.</p>
      */
     public Task<FileList> queryFiles() {
-        return Tasks.call(mExecutor, () -> driveService.files().list()
+
+        return Tasks.call(mExecutor, () -> 
+        
+        driveService.files().list()
                 .setQ("name = 'Base_Datos.csv'")
                 .setSpaces("drive")
                 .setFields("nextPageToken, files(id, name)")
                 .execute());
+       
     }
 
     /**
@@ -648,7 +870,20 @@ cordova.setActivityResultCallback (this);
         });
     }
 
-
+    public void cerrarSesion(){
+        if(mSignInClient!=null)
+        mSignInClient.signOut()
+        .addOnSuccessListener(fileID -> {
+            Log.d("GoogelDrive","Deslogeo  exitoso");
+            driveService=null;
+            mSignInClient=null;
+            mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "SI"));
+        })
+                .addOnFailureListener(exception -> {
+                    Log.d("Siino","Erro al cerrar sesion"+exception);
+                    mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,exception.getLocalizedMessage()));
+                });
+ }
 
 /*
     @Override

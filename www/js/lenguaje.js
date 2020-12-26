@@ -311,10 +311,10 @@ ESPANOL['ti_cargar_ronda'] = "Cargar Bases de Datos";
 FRANCES['ti_cargar_ronda'] = "Charger des bases de données";
 TURCO['ti_cargar_ronda'] = "Veritabanlarini Yükle";
 
-INGLES['mensaje_carga'] = "Remember the files to upload must be in .CSV format, please request these from your supervisor.";
-ESPANOL['mensaje_carga'] = "Recuerde los archivos a cargar deben ser en formato .CSV, solicíteselos a su supervisor.";
-FRANCES['mensaje_carga'] = "N'oubliez pas que les fichiers à télécharger doivent être au format CSV.";
-TURCO['mensaje_carga'] = "Yüklenecek dosyalarin .CSV biçiminde olmasi gerektigini unutmayin, lütfen bunlari amirinizden isteyin.";
+INGLES['mensaje_carga'] = "Remember the files to upload must be in .CSV format and are loaded from Google Drive, please request them from your supervisor.";
+ESPANOL['mensaje_carga'] = "Recuerde los archivos a cargar deben ser en formato .CSV y se cargan desde Google Drive, solicíteselos a su supervisor.";
+FRANCES['mensaje_carga'] = "N'oubliez pas que les fichiers à télécharger doivent être au format .CSV et sont chargés à partir de Google Drive, demandez-les à votre superviseur.";
+TURCO['mensaje_carga'] = "Yüklenecek dosyaların .CSV biçiminde olması gerektiğini ve Google Drive'dan yüklendiğini unutmayın, bunları şefinizden isteyin.";
 
 INGLES['bt_seleccionar_archivo'] = "Select File";
 ESPANOL['bt_seleccionar_archivo'] = "Seleccionar Archivo";
@@ -419,22 +419,22 @@ TURCO['bt_foto_1'] = "Fotograf Çek 1";
 
 INGLES['bt_foto_2'] = "Take a Photo 2";
 ESPANOL['bt_foto_2'] = "Toma foto 2";
-FRANCES['bt_foto_1'] = "Prendre photo 2";
+FRANCES['bt_foto_2'] = "Prendre photo 2";
 TURCO['bt_foto_2'] = "Fotograf Çek 2";
 
 INGLES['bt_foto_3'] = "Take a Photo 3";
 ESPANOL['bt_foto_3'] = "Toma foto 3";
-FRANCES['bt_foto_1'] = "Prendre photo 3";
-TURCO['bt_foto_3'] = "Fotograf Çek 3";
+FRANCES['bt_foto_3'] = "Prendre photo 3";
+TURCO['bt_foto_3'] = "Fotograf Çek 3"
 
 INGLES['bt_foto_4'] = "Take a Photo 4";
 ESPANOL['bt_foto_4'] = "Toma foto 4";
-FRANCES['bt_foto_1'] = "Prendre photo 4";
+FRANCES['bt_foto_4'] = "Prendre photo 4";
 TURCO['bt_foto_4'] = "Fotograf Çek 4";
 
 INGLES['bt_foto_5'] = "Take a Photo 5";
 ESPANOL['bt_foto_5'] = "Toma foto 5";
-FRANCES['bt_foto_1'] = "Prendre photo 5";
+FRANCES['bt_foto_5'] = "Prendre photo 5";
 TURCO['bt_foto_5'] = "Fotograf Çek 5";
 
 INGLES['bt_transmitir'] = "Send";
@@ -632,6 +632,42 @@ ESPANOL['alert_no_sitio_lista'] = "No tienes Sitios Configurados";
 FRANCES['alert_no_sitio_lista'] = "Aucun site n'a été configuré";
 TURCO['alert_no_sitio_lista'] = "Yapilandirilmis Siteniz yok";
 
+
+
+/** Subir desde Drive */
+
+INGLES['bt_cargar_d'] = "Load database";
+ESPANOL['bt_cargar_d'] = "Cargar la base de datos ";
+FRANCES['bt_cargar_d'] = "Charger la base de données";
+TURCO['bt_cargar_d'] = "Veritabanını yükle ";
+
+
+INGLES['bt_cerrar_sesion'] = "Sign out";
+ESPANOL['bt_cerrar_sesion'] = "Cerrar sesión";
+FRANCES['bt_cerrar_sesion'] = "Fermer la session";
+TURCO['bt_cerrar_sesion'] = "Oturumu Kapat";
+
+INGLES['bt_subir_drive'] = "Upload database";
+ESPANOL['bt_subir_drive'] = "Subir toda la base de datos";
+FRANCES['bt_subir_drive'] = "Téléchargez toute la base de données";
+TURCO['bt_subir_drive'] = "Veritabanının tamamını yükleyin";
+
+INGLES['iniciar_sesion'] = "Sign in to Google";
+ESPANOL['iniciar_sesion'] = "Iniciar sesión en Google";
+FRANCES['iniciar_sesion'] = "Connectez-vous à Google";
+TURCO['iniciar_sesion'] = "Google'da oturum açın";
+
+/**Control caidas */
+
+INGLES['bt_subir_0'] = "Upload database";
+ESPANOL['bt_subir_0'] = "Desactivado";
+FRANCES['bt_subir_0'] = "Téléchargez toute la base de données";
+TURCO['bt_subir_0'] = "Veritabanının tamamını yükleyin";
+
+INGLES['bt_subir_1'] = "Upload database";
+ESPANOL['bt_subir_1'] = "Sensibilidad 1";
+FRANCES['bt_subir_1'] = "Téléchargez toute la base de données";
+TURCO['bt_subir_1'] = "Veritabanının tamamını yükleyin";
 
 //POPUP ALERTAS
 //POPUP ALERTAS
@@ -943,11 +979,20 @@ alertasES['sms_inactividad_2'] = " minutos ";
 alertasFR['sms_inactividad_2'] = " minutes ";
 alertasTU['sms_inactividad_2'] = " dakika ";
 
+alertasEN['no_sesio_iniciada'] = "Can't find a Google Drive session started.";
+alertasES['no_sesio_iniciada'] = "No se encuentra una sesion de Google Drive iniciada.";
+alertasFR['no_sesio_iniciada'] = "Impossible de trouver une session Google Drive démarrée.";
+alertasTU['no_sesio_iniciada'] = "Başlatılan bir Google Drive oturumu bulamıyorum.";
 
-alertasEN['bt_cargar_d'] = " Subir desde drive  ";
-alertasES['bt_cargar_d'] = " Subir desde drive ";
-alertasFR['bt_cargar_d'] = " minutes ";
-alertasTU['bt_cargar_d'] = " dakika ";
+alertasEN['sobrescribirBase'] = "This process will overwrite the current database.";
+alertasES['sobrescribirBase'] = "Este proceso va a sobrescribir la base de datos actual.";
+alertasFR['sobrescribirBase'] = "Ce processus écrasera la base de données actuelle.";
+alertasTU['sobrescribirBase'] = "Bu işlem mevcut veri tabanının üzerine yazacaktır.";
+
+alertasEN['sobrescribirBaseEnDrive'] = "This process will overwrite the database on Google Drive.";
+alertasES['sobrescribirBaseEnDrive'] = "Este proceso va a sobrescribir la base de datos en Google Drive.";
+alertasFR['sobrescribirBaseEnDrive'] = "Ce processus écrasera la base de données sur Google Drive.";
+alertasTU['sobrescribirBaseEnDrive'] = "Bu işlem, Google Drive'daki veritabanının üzerine yazacak.";
 
 
 
@@ -1077,8 +1122,26 @@ function idioma(val){
 	$('.bt_cargar').val( idiomaSeleccionado['bt_cargar'] );
 	$('.bt_seleccionar_archivo').val( idiomaSeleccionado['bt_seleccionar_archivo'] );
 	
-	$('.bt_cargar_d').val( idiomaSeleccionado['bt_cargar_d'] );
-	$('#bt_cargar_d').val( idiomaSeleccionado['bt_cargar_d'] );
+	/** cargar rondas desde drive */
+	$('.bt_cargar_d').val( idiomaSeleccionado['bt_cargar_d']  );
+	$('#bt_cargar_d').val( idiomaSeleccionado['bt_cargar_d']  );
+	
+	$('.bt_cerrar_sesion').val( idiomaSeleccionado['bt_cerrar_sesion']  );
+	$('#bt_cerrar_sesion').val( idiomaSeleccionado['bt_cerrar_sesion']  );
+
+	$('.bt_subir_drive').val( idiomaSeleccionado['bt_subir_drive']  );
+	$('#bt_subir_drive').val( idiomaSeleccionado['bt_subir_drive']  );
+
+	/**detector de caidas */
+	$('.bt_subir_0').val( idiomaSeleccionado['bt_subir_0']  );
+	$('#bt_subir_0').val( idiomaSeleccionado['bt_subir_0']  );
+
+	$('.bt_subir_1').val( idiomaSeleccionado['bt_subir_1']  );
+	$('#bt_subir_1').val( idiomaSeleccionado['bt_subir_1']  );
+
+	/** Log in */
+	$('.iniciar_sesion').val( idiomaSeleccionado['iniciar_sesion']  );
+	$('#iniciar_sesion').val( idiomaSeleccionado['iniciar_sesion']  );
 	
 	//crear rondas
 	$('#ti_crear_ronda').html( idiomaSeleccionado['ti_crear_ronda'] );
