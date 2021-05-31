@@ -126,6 +126,14 @@ function Ir_Setup(){
 	$("#set_sms_emergencia").val( localStorage.getItem("set_sms_emergencia") );
 	
 	$("#set_minutos_quietud").val( localStorage.getItem("set_minutos_quietud") );
+
+	$("#set_minutos_quietud").val( localStorage.getItem("set_minutos_quietud") );
+	$("#set_nivelCaidas").val( localStorage.getItem("caidaNivel") );
+	
+	if(localStorage.getItem("minutosEnvioReportes")==null){
+		localStorage.setItem("minutosEnvioReportes","1")
+	}
+	$("#set_minreportes").val( localStorage.getItem("minutosEnvioReportes") );
 	
 
 	if( localStorage.getItem("activar_podemotro") == 1){ $("#set_activar_podometro").prop( "checked",true );  }
@@ -133,6 +141,9 @@ function Ir_Setup(){
 	
 	if( localStorage.getItem("activar_mandonw") == 1){ $("#set_activar_acelerometro").prop( "checked",true );  }
 	if( localStorage.getItem("activar_mandonw") == 2){ $("#set_activar_acelerometro").prop( "checked",false ) ;  }
+
+	if( localStorage.getItem("activar_caidas") == 1){ $("#set_activarCaidas").prop( "checked",true );  }
+	if( localStorage.getItem("activar_caidas") == 2){ $("#set_activarCaidas").prop( "checked",false ) ;  }
 
 	window.location = "#SETUP"; 
 	
@@ -369,7 +380,7 @@ function Cantidad_Reportes_Hoy(){
 	conteo = localStorage.getItem("conteo");
 	
 	if(primer_envio_hoy == "" || primer_envio_hoy == null){ localStorage.setItem("primer_envio_hoy", fecha_actual_hoy); }
-	if(conteo == "" || conteo == null){ localStorage.setItem("conteo", 12 ); conteo = 12 }
+	if(conteo == "" || conteo == null){ localStorage.setItem("conteo", 48 ); conteo = 48 }
 	
 	//SI LAS FECHAS SON IGUALES
 	if(fecha_actual_hoy == primer_envio_hoy ){
@@ -377,7 +388,7 @@ function Cantidad_Reportes_Hoy(){
 	}
 	//SI EL DÍA YA CAMBÍO
 	if(fecha_actual_hoy != primer_envio_hoy ){
-		localStorage.setItem("conteo", 12-1 );
+		localStorage.setItem("conteo", 48-1 );
 		localStorage.setItem("primer_envio_hoy", fecha_actual_hoy);
 	}
 	
@@ -411,7 +422,7 @@ function Contador_Mostrar_Envios(){
 	conteo = localStorage.getItem("conteo");
 	
 	if(primer_envio_hoy == "" || primer_envio_hoy == null){ localStorage.setItem("primer_envio_hoy", fecha_actual_hoy); }
-	if(conteo == "" || conteo == null){ localStorage.setItem("conteo", 12 ); conteo = 12 }
+	if(conteo == "" || conteo == null){ localStorage.setItem("conteo", 48 ); conteo = 48 }
 	
 	//SI LAS FECHAS SON IGUALES
 	if(fecha_actual_hoy == primer_envio_hoy ){
@@ -425,8 +436,8 @@ function Contador_Mostrar_Envios(){
 	}
 	//SI EL DÍA YA CAMBÍO
 	if(fecha_actual_hoy != primer_envio_hoy ){
-		localStorage.setItem("conteo", 12 );
-		$("#badge").html( "12" );
+		localStorage.setItem("conteo", 48 );
+		$("#badge").html( "48" );
 	}
 }
 

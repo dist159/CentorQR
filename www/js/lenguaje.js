@@ -87,15 +87,21 @@ ESPANOL['ti_report_transmit'] = "Intervalo - Transmision Reportes *";
 FRANCES['ti_report_transmit'] = "Intervalle de transmission des rapports*";
 TURCO['ti_report_transmit'] = "Iletim Araligi Raporu *";
 
-INGLES['place_hours'] = "Hours (04 to 168) *";
-ESPANOL['place_hours'] = "Horas (04 a 168)*";
-FRANCES['place_hours'] = "Heures (04 à 168)*";
-TURCO['place_hours'] = "Saatler (04 - 168) *";
+INGLES['place_hours'] = "Hours (00 to 168) *";
+ESPANOL['place_hours'] = "Horas (00 a 168)*";
+FRANCES['place_hours'] = "Heures (00 à 168)*";
+TURCO['place_hours'] = "Saatler (00 - 168) *";
 
 INGLES['alert_quietud'] = "30 seconds to inactivity Alarm";
 ESPANOL['alert_quietud'] = "En 30 segundos se enviará alerta de inactividad.";
-FRANCES['alert_quietud'] = "30 secondes á l'alarme inactivité";
+FRANCES['alert_quietud'] = "30 secondes á l'alarme Mandown";
 TURCO['alert_quietud'] = "hareketsizlik Alarmi için 30 saniye";
+
+INGLES['alert_quietud2'] = "Fall alert will be sent within 30 seconds.";
+ESPANOL['alert_quietud2'] = "En 30 segundos se enviará alerta de caída.";
+FRANCES['alert_quietud2'] = "L'alerte d'automne sera envoyée dans les 30 secondes.";
+TURCO['alert_quietud2'] = "Düşme uyarısı 30 saniye içinde gönderilecektir.";
+
 
 INGLES['ti_report_quietud'] = "Inactivity *";
 ESPANOL['ti_report_quietud'] = "Inactividad *";
@@ -127,6 +133,22 @@ INGLES['ti_activar_mandown'] = "Detect Inactivity *";
 ESPANOL['ti_activar_mandown'] = "Detectar Inactividad *";
 FRANCES['ti_activar_mandown'] = "Détecter l'inactivité *";
 TURCO['ti_activar_mandown'] = "Hareketsizlik Tespiti *";
+
+INGLES['ti_activar_mandown2'] = "Detect Falls *";
+ESPANOL['ti_activar_mandown2'] = "Detectar Caídas *";
+FRANCES['ti_activar_mandown2'] = "Détecter les chutes *";
+TURCO['ti_activar_mandown2'] = "Düşmeleri Algıla *";
+
+INGLES['ti_activar_mandown3'] = "Fall sensitivity *";
+ESPANOL['ti_activar_mandown3'] = "Sensibilidad caidas *";
+FRANCES['ti_activar_mandown3'] = "Sensibilité aux chutes *";
+TURCO['ti_activar_mandown3'] = "Düşme hassasiyeti *";
+
+INGLES['ti_activar_minutos_reporte'] = "Time to send automatic report after transmission interval *";
+ESPANOL['ti_activar_minutos_reporte'] = "Tiempo para enviar reporte automático después del intervalo de transmisión *";
+FRANCES['ti_activar_minutos_reporte'] = "Il est temps d'envoyer un rapport automatique après l'intervalle de transmission *";
+TURCO['ti_activar_minutos_reporte'] = "İletim aralığından sonra otomatik rapor gönderme süresi *";
+
 
 
 INGLES['bt_save'] = "Save";
@@ -163,7 +185,7 @@ TURCO['bt_trasnmit_tours'] = "Raporlari Aktar";
 
 INGLES['bt_record_check_point'] = "Record Checkpoint";
 ESPANOL['bt_record_check_point'] = "Registrar Punto Control";
-FRANCES['bt_record_check_point'] = "Créer un point de contrôle";
+FRANCES['bt_record_check_point'] = "Scanner un point de contrôle";
 TURCO['bt_record_check_point'] = "Kayit Kontrol Noktasi";
 
 INGLES['bt_incident_message'] = "Incident Message";
@@ -189,7 +211,7 @@ TURCO['bt_menu_alert'] = "Uyari Gönder";
 
 INGLES['bt_menu_checkpoint'] = "Record Checkpoint";
 ESPANOL['bt_menu_checkpoint'] = "Registrar Punto Control";
-FRANCES['bt_menu_checkpoint'] = "Créer un point de contrôle";
+FRANCES['bt_menu_checkpoint'] = "Scanner un point de contrôl";
 TURCO['bt_menu_checkpoint'] = "Kayit Kontrol Noktasi";
 
 INGLES['bt_menu_menssage'] = "Incident Message";
@@ -963,16 +985,26 @@ alertasES['alert_sin_tel'] = "Sin permiso para llamada";
 alertasFR['alert_sin_tel'] = "Permission d'appeler refusée";
 alertasTU['alert_sin_tel'] = "Arama izni yok";
 
-alertasEN['alert_cuota_cumplida'] = "Sorry, you have exceeded the daily limit of report transmissions (12 / Day); you can restart transmissions after 00:00 AM.";
-alertasES['alert_cuota_cumplida'] = "Lo sentimos, ya sobrepasó el límite diario de transmisión de reportes (12/Día). Después de las 00:00 AM podrá reiniciar transmisiones.";
-alertasFR['alert_cuota_cumplida'] = "Désolé, vous avez dépassé la limite quotidienne de transmission de rapports (12 / Day); vous pouvez redémarrer les transmissions après 00h00.";
-alertasTU['alert_cuota_cumplida'] = "Üzgünüz, günlük rapor iletimi sinirini astiniz (12 / Gün); 00: 00’dan sonra yayinlari yeniden baslatabilirsiniz.";
+alertasEN['alert_cuota_cumplida'] = "Sorry, you have exceeded the daily limit of report transmissions (48 / Day); you can restart transmissions after 00:00 AM.";
+alertasES['alert_cuota_cumplida'] = "Lo sentimos, ya sobrepasó el límite diario de transmisión de reportes (48/Día). Después de las 00:00 AM podrá reiniciar transmisiones.";
+alertasFR['alert_cuota_cumplida'] = "Désolé, vous avez dépassé la limite quotidienne de transmission de rapports (48 / Day); vous pouvez redémarrer les transmissions après 00h00.";
+alertasTU['alert_cuota_cumplida'] = "Üzgünüz, günlük rapor iletimi sinirini astiniz (48 / Gün); 00: 00’dan sonra yayinlari yeniden baslatabilirsiniz.";
  
 
 alertasEN['sms_inactividad_1'] = "Inactivity has been detected, ";
 alertasES['sms_inactividad_1'] = "Se ha detectado inactividad de ";
 alertasFR['sms_inactividad_1'] = "L'inactivité a été détectée ";
 alertasTU['sms_inactividad_1'] = "Hareketsizlik tespit edildi ";
+
+alertasEN['sms_caida_1'] = "A fall have been detected, ";
+alertasES['sms_caida_1'] = "Se ha detectado una caída, ";
+alertasFR['sms_caida_1'] = "Une chute a été détectée, ";
+alertasTU['sms_caida_1'] = "Bir düşüş tespit edildi, ";
+
+alertasEN['sms_reporte'] = "The current report is being automatically uploaded by the system because it was not uploaded in the indicated time. Current Guard: ";
+alertasES['sms_reporte'] = "El reporte actual se esta subiendo automaticamente por el sistema debido a que no se subio en el tiempo indicado. Guardia actual: ";
+alertasFR['sms_reporte'] = "Le rapport actuel est automatiquement téléchargé par le système car il n'a pas été téléchargé dans le délai indiqué. Garde actuelle: ";
+alertasTU['sms_reporte'] = "Mevcut rapor, belirtilen sürede yüklenmediği için sistem tarafından otomatik olarak yükleniyor. Mevcut Koruma: ";
 
 alertasEN['sms_inactividad_2'] = " minutes  ";
 alertasES['sms_inactividad_2'] = " minutos ";
@@ -1058,7 +1090,7 @@ function idioma(val){
 	$('#place_hours_quietud').html( idiomaSeleccionado['place_hours_quietud'] );
 	
 	$('#alert_quietud').html( idiomaSeleccionado['alert_quietud'] );
-	
+	$('#alert_quietud2').html( idiomaSeleccionado['alert_quietud2'] );	
 	
 
 
@@ -1069,7 +1101,11 @@ function idioma(val){
 	$('#ti_activar_podometro').html( idiomaSeleccionado['ti_activar_podometro'] );
 	$('#ti_activar_mandown').html( idiomaSeleccionado['ti_activar_mandown'] );
 	$('#ti_activar_mandown_label').html( idiomaSeleccionado['ti_activar_mandown'] );
+	$('#ti_activar_mandown_label2').html( idiomaSeleccionado['ti_activar_mandown2'] );
+	$('#ti_activar_mandown_label3').html( idiomaSeleccionado['ti_activar_mandown3'] );
+	$('#ti_activar_minutos_reporte_label').html( idiomaSeleccionado['ti_activar_minutos_reporte'] );
 	
+
 	$('.bt_save').val( idiomaSeleccionado['bt_save'] );
 	$('.bt_cancel').val( idiomaSeleccionado['bt_cancel'] );
 	$('.bt_finalizar').val( idiomaSeleccionado['bt_finalizar'] );

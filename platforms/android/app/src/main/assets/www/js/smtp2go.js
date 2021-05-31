@@ -117,8 +117,12 @@ function Transmitir_Tour() {
 			"</b><br />" + alertasText["mail_fecha"] + ": <b>" + fecha + "</b><br>" + alertasText["mail_ubicacion"] + ": " + latitud + "," + longitud + "</td></tr><tr><td style=\"background-color: #00174b; color:#ffffff\" align=\"center\">Centor Ares - 2018</td></tr></table>";
 
 		adjuntos.push({ 'filename': localStorage.getItem("nombre_guarda_sesion") + fecha + "_" + hora_name + ".csv", 'fileblob': encodedString, 'mimetype': 'text/plain' });
-		window.plugins.gdrive.uploadFile(localStorage.getItem("nombre_guarda_sesion") + fecha + "_" + hora_name , reporte_csv, adjuntosFotos,
+		window.plugins.gdrive.uploadFile(localStorage.getItem("nombre_guarda_sesion") + fecha + "_" + hora_name, reporte_csv, adjuntosFotos,
 			function (res) {
+				
+			
+				stopTimerAlertaReporte();
+				
 				localStorage.setItem("sesionActiva", "si");
 				$("#buttonCerrarSesion").show();
 				console.log(res);
@@ -135,8 +139,8 @@ function Transmitir_Tour() {
 				Solo_Setear_Fecha_Cierre();  //SETEAMOS LA FECHA DE CIERRE
 				Ir_Home();
 				Cantidad_Reportes_Hoy();
-				DetenerPedometro();
-
+				//DetenerPedometro();
+				localStorage.setItem("pasosAntes", localStorage.getItem("pasos"))
 
 				localStorage.setItem("foto1", "");
 				localStorage.setItem("foto2", "");
@@ -165,12 +169,16 @@ function Transmitir_Tour() {
 			function (err) {
 				console.log(err);
 				$("#Preloader").hide(); //OCULTAMOS EL PRELOADER
+
+				/**Habilitar nuevamente el contador para enviar automaticamente el reporte ya que no se envio de manera exitosa*/
+				Activar_Timer_Envio_Reporte();
+				
 				if (err == "not sign in") {
 					$("#PopUp").show();
 					$("#parrafo_info").html('<img src="img/icon_x.png" width="30"/><br>');
 					$("#parrafo_info").append(alertasText["no_sesio_iniciada"] + "<br>");
 					$("#parrafo_info").append('<input type="button" data-role="none" value="Ok" class="bt_verde" onclick="Ocultar_PopUp()">');
-				}else{
+				} else {
 					$("#PopUp").show();
 					$("#parrafo_info").html('<img src="img/icon_x.png" width="30"/><br>');
 					$("#parrafo_info").append("Error, check internet connection" + "<br>");
@@ -180,73 +188,73 @@ function Transmitir_Tour() {
 			}
 		);
 
-		if (adjuntos.length()) {
+	/*	if (adjuntos.length()) {
 
 			// Built by LucyBot. www.lucybot.com
-		/*	var url = "https://api.smtp2go.com/v3/email/send";
-			$.ajax({
-				url: url,
-				method: 'POST',
-				headers: {
-					'Content-Type': "application/json"
-				},
-				data: JSON.stringify({
-					'api_key': api_key,
-					'sender': correo_sender, //
-					'to': [
-						set_mail_1,
-						set_mail_2
-					],
-					'subject': alertasText["mail_titulo_reporte"] + " - Centor Ares",
-					'html_body': cuerpo,
-					'text_body': "reporte",
-					'attachments': adjuntos
-				}),
-			}).done(function (result) {
-				$("#Preloader").hide(); //OCULTAMOS EL PRELOADER
-				$("#PopUp").show();
-				$("#parrafo_info").html('<img src="img/icono_check.png" width="30"/><br>');
-				$("#parrafo_info").append(alertasText["alert_transmision_exito"] + "<br>");
-				$("#parrafo_info").append('<input type="button" data-role="none" value="Ok" class="bt_verde" onclick="Ocultar_PopUp()">');
-
-
-				localStorage.setItem("reporte_tour", "");  //VACIAMOS LA BASE DE REPORTE LOCAL
-				Solo_Setear_Fecha_Cierre();  //SETEAMOS LA FECHA DE CIERRE
-				Ir_Home();
-				Cantidad_Reportes_Hoy();
-				DetenerPedometro();
-
-				localStorage.setItem("foto1", "");
-				localStorage.setItem("foto2", "");
-				localStorage.setItem("foto3", "");
-				localStorage.setItem("foto4", "");
-				localStorage.setItem("foto5", "");
-
-				$("#imagenPrevio1").hide();
-				$("#imagenPrevio2").hide();
-				$("#imagenPrevio3").hide();
-				$("#imagenPrevio4").hide();
-				$("#imagenPrevio5").hide();
-
-
-
-				//PARA ACTIVAR LA LICENCIA
-				activar_licencia = localStorage.getItem("activar_licencia");
-				if (activar_licencia == "por_activar") {
-					Transmitir_Activar_Licencia();
-				}
-				//PARA ACTIVAR LA LICENCIA
-
-			}).fail(function (err) {
-				$("#Preloader").hide(); //OCULTAMOS EL PRELOADER
-				$("#PopUp").show();
-				$("#parrafo_info").html('<img src="img/icono_check.png" width="30"/><br>');
-				$("#parrafo_info").append(alertasText["alert_sin_internet"] + "<br>");
-				$("#parrafo_info").append('<input type="button" data-role="none" value="Ok" class="bt_verde" onclick="Ocultar_PopUp()">');
-				//throw err;
-			});
-			*/
-		}
+			/*	var url = "https://api.smtp2go.com/v3/email/send";
+				$.ajax({
+					url: url,
+					method: 'POST',
+					headers: {
+						'Content-Type': "application/json"
+					},
+					data: JSON.stringify({
+						'api_key': api_key,
+						'sender': correo_sender, //
+						'to': [
+							set_mail_1,
+							set_mail_2
+						],
+						'subject': alertasText["mail_titulo_reporte"] + " - Centor Ares",
+						'html_body': cuerpo,
+						'text_body': "reporte",
+						'attachments': adjuntos
+					}),
+				}).done(function (result) {
+					$("#Preloader").hide(); //OCULTAMOS EL PRELOADER
+					$("#PopUp").show();
+					$("#parrafo_info").html('<img src="img/icono_check.png" width="30"/><br>');
+					$("#parrafo_info").append(alertasText["alert_transmision_exito"] + "<br>");
+					$("#parrafo_info").append('<input type="button" data-role="none" value="Ok" class="bt_verde" onclick="Ocultar_PopUp()">');
+	
+	
+					localStorage.setItem("reporte_tour", "");  //VACIAMOS LA BASE DE REPORTE LOCAL
+					Solo_Setear_Fecha_Cierre();  //SETEAMOS LA FECHA DE CIERRE
+					Ir_Home();
+					Cantidad_Reportes_Hoy();
+					DetenerPedometro();
+	
+					localStorage.setItem("foto1", "");
+					localStorage.setItem("foto2", "");
+					localStorage.setItem("foto3", "");
+					localStorage.setItem("foto4", "");
+					localStorage.setItem("foto5", "");
+	
+					$("#imagenPrevio1").hide();
+					$("#imagenPrevio2").hide();
+					$("#imagenPrevio3").hide();
+					$("#imagenPrevio4").hide();
+					$("#imagenPrevio5").hide();
+	
+	
+	
+					//PARA ACTIVAR LA LICENCIA
+					activar_licencia = localStorage.getItem("activar_licencia");
+					if (activar_licencia == "por_activar") {
+						Transmitir_Activar_Licencia();
+					}
+					//PARA ACTIVAR LA LICENCIA
+	
+				}).fail(function (err) {
+					$("#Preloader").hide(); //OCULTAMOS EL PRELOADER
+					$("#PopUp").show();
+					$("#parrafo_info").html('<img src="img/icono_check.png" width="30"/><br>');
+					$("#parrafo_info").append(alertasText["alert_sin_internet"] + "<br>");
+					$("#parrafo_info").append('<input type="button" data-role="none" value="Ok" class="bt_verde" onclick="Ocultar_PopUp()">');
+					//throw err;
+				});
+				*/
+	//	}
 	}
 }
 
@@ -535,12 +543,12 @@ function Exportar_Todos_Los_Sitios() {
 
 	correo_sender = localStorage.getItem("correo_sender");
 
-	window.plugins.gdrive.deleteFile("Base_Datos.csv", base_csv,
+	window.plugins.gdrive.deleteFile("Database", base_csv,
 		function (res) {
 			localStorage.setItem("sesionActiva", "si");
 			console.log(res);
 			//alert(res);
-			
+
 			$("#Preloader").hide(); //OCULTAMOS EL PRELOADER		
 
 			$("#PopUp").show();
@@ -557,13 +565,13 @@ function Exportar_Todos_Los_Sitios() {
 		},
 		function (err) {
 			$("#Preloader").hide(); //OCULTAMOS EL PRELOADER	
-			console.log("Ocurrio un erro: "+err);
-			
-				$("#PopUp").show();
-				$("#parrafo_info").html('<img src="img/icon_x.png" width="30"/><br>');
-				$("#parrafo_info").append(err + "<br>");
-				$("#parrafo_info").append('<input type="button" data-role="none" value="Ok" class="bt_verde" onclick="Ocultar_PopUp()">');
-			
+			console.log("Ocurrio un erro: " + err);
+
+			$("#PopUp").show();
+			$("#parrafo_info").html('<img src="img/icon_x.png" width="30"/><br>');
+			$("#parrafo_info").append(err + "<br>");
+			$("#parrafo_info").append('<input type="button" data-role="none" value="Ok" class="bt_verde" onclick="Ocultar_PopUp()">');
+
 		}
 	);
 	/*
@@ -724,7 +732,7 @@ function Transmitir_Base_Local(sitio) {
 
 	correo_sender = localStorage.getItem("correo_sender");
 
-	window.plugins.gdrive.uploadFile(sitio + fecha + ".csv", base_csv, null,
+	window.plugins.gdrive.uploadFile(sitio + fecha, base_csv, null,
 		function (res) {
 			localStorage.setItem("sesionActiva", "si");
 			$("#buttonCerrarSesion").show();
@@ -736,7 +744,7 @@ function Transmitir_Base_Local(sitio) {
 			$("#parrafo_info").html('<img src="img/icono_check.png" width="30"/><br>');
 			$("#parrafo_info").append(alertasText["alert_transmision_exito"] + "<br>");
 			$("#parrafo_info").append('<input type="button" data-role="none" value="Ok" class="bt_verde" onclick="Ocultar_PopUp()">');
-			
+
 			//PARA ACTIVAR LA LICENCIA
 			activar_licencia = localStorage.getItem("activar_licencia");
 			if (activar_licencia == "por_activar") {
@@ -753,7 +761,7 @@ function Transmitir_Base_Local(sitio) {
 				$("#parrafo_info").html('<img src="img/icon_x.png" width="30"/><br>');
 				$("#parrafo_info").append(alertasText["no_sesio_iniciada"] + "<br>");
 				$("#parrafo_info").append('<input type="button" data-role="none" value="Ok" class="bt_verde" onclick="Ocultar_PopUp()">');
-			}else{
+			} else {
 				$("#PopUp").show();
 				$("#parrafo_info").html('<img src="img/icon_x.png" width="30"/><br>');
 				$("#parrafo_info").append("Error, check internet connection" + "<br>");

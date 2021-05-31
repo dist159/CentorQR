@@ -44,9 +44,12 @@ function ValidarSensores(){
 //ESTA FUNCION HABILITAR EL SENSOR PARA GUARDAR LOS PASOS
 //ESTA FUNCION HABILITAR EL SENSOR PARA GUARDAR LOS PASOS
 function Activar_Pedometro(){
+	localStorage.setItem("pasosAntes",0)
 	var exitoPedometro = function (pedometerData) {
 		//$("#Cantidad_Pasos").html( pedometerData.numberOfSteps );
+		//pedometerData.numberOfSteps=500;
 		localStorage.setItem("pasos", pedometerData.numberOfSteps);
+		//console.log("lossss pasos sonn:" + pedometerData.numberOfSteps);
 		//alert( pedometerData.numberOfSteps );
 		// pedometerData.startDate; -> ms since 1970
 		// pedometerData.endDate; -> ms since 1970
@@ -86,6 +89,7 @@ function errorDetenerPedometroReport(e){
 //PARA REACTIVAR EL PEDOMETRO
 //PARA REACTIVAR EL PEDOMETRO
 function ReactivarPedometro(){
+	localStorage.setItem("pasos_tmp",  parseInt(localStorage.getItem("pasos_tmp")-parseInt(localStorage.getItem("pasos")) ));
 	pedometer.stopPedometerUpdates(exitoReactivarPedometro, errorReactivarPedometro);
 }
 function exitoReactivarPedometro(){	

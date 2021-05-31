@@ -1,6 +1,8 @@
 if(localStorage.getItem("iniciar_crono" ) == "" || localStorage.getItem("iniciar_crono" ) == null ){
 	localStorage.setItem("iniciar_crono", "desactivar");
 }
+var timeout_alerta_reporte
+var segundos_alerta_reporte =0;
 
 //FUNCION PARA VALIDAR SI EL TIMER SE DEBE ACTIVAR O NO
 function Validar_Timer_Activo(){
@@ -155,6 +157,10 @@ function funcionando(){
 		localStorage.setItem("iniciar_crono", "desactivar" );
 		$("#base_crono").css("background-color","#4caf50"); // CAMBIAMOS EL COLOR A VERDE
 		document.getElementById('crono').innerHTML = "";
+		
+		
+		/**Habilitar el contador para enviar automaticamente el reporte */
+		Activar_Timer_Envio_Reporte();
 	}
 }
  
@@ -163,5 +169,39 @@ function LeadingZero(Time) {
 	return (Time < 10) ? "0" + Time : + Time;
 }
 
+
+function Activar_Timer_Envio_Reporte() {
+	if(timeout_alerta_reporte!=undefined&&timeout_alerta_reporte!=null){
+		clearInterval(timeout_alerta_reporte);
+	}
+
+
+	timeout_alerta_reporte = setInterval(Timer_Reporte_Alerta, 1000);
+}
+
+function Timer_Reporte_Alerta() {
+	if (segundos_alerta_reporte >= (parseInt(localStorage.getItem("minutosEnvioReportes"))*60)) {
+		$("#PopUp").hide();
+		segundos_alerta_reporte = 0;
+		 /// SE ENVÍA UN SMS
+		Enviar_SMS_alerta_Reporte()
+		//*Transmite el tour*/
+		clearInterval(timeout_alerta_reporte);
+		Transmitir_Tour()
+		
+		
+	}
+	else {
+		segundos_alerta_reporte++;
+		console.log("contando"+segundos_alerta_reporte+ " -- " +parseInt(localStorage.getItem("minutosEnvioReportes")))
+	}
+
+}
+
+function stopTimerAlertaReporte(){
+	if(timeout_alerta_reporte!=undefined&&timeout_alerta_reporte!=null){
+		clearInterval(timeout_alerta_reporte);
+	}
+}
 
 

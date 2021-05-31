@@ -6,8 +6,8 @@ function tomarFotoCamara(val) {
 	//if(val == 1){
 	navigator.camera.getPicture(Procesar_Imagen, onFail, {
 		quality: 30,
-	//	destinationType: Camera.DestinationType.DATA_URL
-	destinationType: Camera.DestinationType.FILE_URI
+		//	destinationType: Camera.DestinationType.DATA_URL
+		destinationType: Camera.DestinationType.FILE_URI
 	});
 
 	//}
@@ -43,24 +43,24 @@ function Procesar_Imagen(imageData) {
 
 
 
-window.cordova.plugins.imagesaver.saveImageToGallery(imageData, onSaveImageSuccess, onSaveImageError);
-                                            
-function onSaveImageSuccess(res) {
-	console.log('--------------success');
-	localStorage.setItem("foto" + opcion_foto, res);
-	
-	var image = document.getElementById('imagenPrevio' + opcion_foto);
-	image.src = res;
-	$("#imagenPrevio" + opcion_foto).show();
-	//GUARDAMOS LA FOTO EN BASE 62
-	
-console.log("la data es:" +res)
+	window.cordova.plugins.imagesaver.saveImageToGallery(imageData, onSaveImageSuccess, onSaveImageError);
 
-}
-                                            
-function onSaveImageError(error) {
-    console.log('--------------error: ' + error);
-}
+	function onSaveImageSuccess(res) {
+		console.log('--------------success');
+		localStorage.setItem("foto" + opcion_foto, res);
+
+		var image = document.getElementById('imagenPrevio' + opcion_foto);
+		image.src = res;
+		$("#imagenPrevio" + opcion_foto).show();
+		//GUARDAMOS LA FOTO EN BASE 62
+
+		console.log("la data es:" + res)
+
+	}
+
+	function onSaveImageError(error) {
+		console.log('--------------error: ' + error);
+	}
 
 
 }

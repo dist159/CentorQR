@@ -19,14 +19,18 @@ AcceleracionY_stored = 9;
 AcceleracionZ_stored = 9;
 
 function monitorearCaidas() {
+
 	//cordova.plugins.backgroundMode.setEnabled(true);
 	//cordova.plugins.backgroundMode.moveToBackground();
-	temporizador_timer = setInterval('verificar_desaceleracion_drastica()', 50);
+	//temporizador_timer = setInterval('verificar_desaceleracion_drastica()', 50);
+	
 	window.addEventListener("devicemotion", function (event) {
 		// Process event.acceleration, event.accelerationIncludingGravity,
 		// event.rotationRate and event.interval
+		if (localStorage.getItem("activar_caidas") != "1")
+		return
 
-		//  console.log("me estoy moviedno X "+ event.accelerationIncludingGravity.x)
+		 // console.log("me estoy moviedno X "+ event.accelerationIncludingGravity.x)
 		//  console.log("me estoy moviedno Y "+ event.accelerationIncludingGravity.y)
 		//  console.log("me estoy moviedno Z "+ event.accelerationIncludingGravity.z)
 		let index = 0;
@@ -40,16 +44,42 @@ function monitorearCaidas() {
 		AcceleracionX = event.accelerationIncludingGravity.x;
 		AcceleracionY = event.accelerationIncludingGravity.y;
 		AcceleracionZ = event.accelerationIncludingGravity.z;
+		valorCaida=localStorage.getItem("caidaNivel")
+		//console.log(localStorage.getItem("caidaNivel"))
+		//console.log(valorCaida)
+		let val=0;
+		if(valorCaida=="1"){
+			val=0.35;
+		}
+		if(valorCaida=="2"){
+			val=0.6;
+		}
+		if(valorCaida=="3"){
+			val=1.5;
+		}
 
 		let rootSquare = Math.sqrt(Math.pow(event.accelerationIncludingGravity.x, 2) + Math.pow(event.accelerationIncludingGravity.y, 2) + Math.pow(event.accelerationIncludingGravity.z, 2));
-		if (rootSquare < 0.2) {
+		//console.log(rootSquare)
+		if (rootSquare < val) {
 
 			//  Toast.makeText(this, "Fall detected", Toast.LENGTH_SHORT).show();
 
-			console.log("Caida detectada")
-			alert("Alerta se detecto una caida")
+			//console.log("Caida detectada")
+		//	alert("Alerta se detecto una caida")
 
-			guardarCaida("Caida", AcceleracionX, AcceleracionY, AcceleracionZ);
+		//	guardarCaida("Caida", AcceleracionX, AcceleracionY, AcceleracionZ);
+
+		if(localStorage.getItem("yaseActivoAlarma")!="si"){
+			$("#PopUpCaida").show();
+			//cordova.plugins.backgroundMode.moveToForeground(); //esta funcion trae al primer plano
+			segundos_quietud2 = 0;
+			segundos_alerta_quietud2 = 0;
+			audioElement.play();
+			//clearInterval(timeout_quitud);
+			Activar_Timer_caida_Alerta(); /// AQUI SE ACTIVA EL SEGUNDO CRONOMETRO //////////		AQUI SE ACTIVA EL SEGUNDO CRONOMETRO
+		}
+		}else{
+			
 		}
 
 
@@ -276,6 +306,16 @@ function Cancelar_Quietud() {
 	Cancelar_Quietud_Alerta();
 }
 
+function Cancelar_Quietud2() {
+	segundos_quietud2 = 0;
+	segundos_alerta_quietud2 = 0;
+	localStorage.setItem("yaseActivoAlarma","no");
+	$("#PopUpCaida").hide();
+	//Activar_Timer_Quietud();
+	Cancelar_Caida_Alerta();
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -305,6 +345,40 @@ function Cancelar_Quietud_Alerta() {
 	clearInterval(timeout_alerta_quitud);
 	$("#PopUpQuietud").hide();
 }
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+function Activar_Timer_caida_Alerta() {
+	localStorage.setItem("yaseActivoAlarma","si");
+	timeout_alerta_quitud2 = setInterval(Timer_Caida_Alerta, 1000);
+}
+
+function Timer_Caida_Alerta() {
+	if (segundos_alerta_quietud2 >= 30) {
+		$("#PopUpCaida").hide();
+		segundos_quietud2 = 0;
+		segundos_alerta_quietud2 = 0;
+		clearInterval(timeout_alerta_quitud2);
+	//	console.log("Seenvio")
+		localStorage.setItem("yaseActivoAlarma","no");
+		Enviar_SMS_alerta_Caida(); /// SE ENVÍA UN SMS
+		
+	}
+	else {
+		segundos_alerta_quietud2++;
+	//	console.log("contando")
+	}
+}
+
+function Cancelar_Caida_Alerta() {
+	segundos_quietud2 = 0;
+	segundos_alerta_quietud2 = 0;
+	clearInterval(timeout_alerta_quitud2);
+	$("#PopUpCaida").hide();
+}
+
 
 
 

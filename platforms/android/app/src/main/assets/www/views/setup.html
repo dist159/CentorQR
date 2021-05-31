@@ -11,14 +11,15 @@
 
 
     <div style="  display: table;width: 100%;height: 45px;">
-        <div style="margin-top: 0px; width: 35px; display: table-cell;">
-            <img src="img/icondrive.png" style="width: 45px; margin-bottom: 0px; margin-left: 45px;">
+        <div style="margin-top: 0px; width: 35px; height: 45px; display: table-cell;  ">
+            <img align="center" src="img/icondrive.png"
+                style="width: 45px; height: 45px; margin: auto; margin-left: 45px; align-items: center;">
         </div>
-        <div style="display: table-cell; margin-top: 0px;">
+        <div style="display: table-cell; margin-top: -15px;  height: 45px;">
             <input id="buttonIniciarSesion" type="button" class="bt_verde iniciar_sesion" data-role="none"
-                value="Cerrar sesion" style="width: 70%; margin-top: auto;" onclick="logIn()">
+                value="Cerrar sesion" style="width: 70%; height: 45px; margin-top: 0px;" onclick="logIn()">
             <input id="buttonCerrarSesion" type="button" class="bt_azul bt_cerrar_sesion" data-role="none"
-                value="Cerrar sesion" style="width: 70%;  margin: auto;" onclick="logOut()">
+                value="Cerrar sesion" style="width: 70%;  height: 45px; margin-top: 0px;" onclick="logOut()">
         </div>
     </div>
 
@@ -26,10 +27,10 @@
     <div class="ti_setup" id="ti_key_super">Key in Supervisor PIN <font color="#f00">*</font>
     </div>
     <input type="text" id="set_key_supervisor" data-role="none" class="input_text" maxlength="4">
-
+    <!--
     <div class="ti_setup" id="ti_report_destination">Report Destination Emails <font color="#f00">*</font>
     </div>
-<!--
+
     <div class="sub_ti_setup" id="ti_email_1">Email 1 <font color="#f00">*</font>
     </div>
     <input type="email" id="set_mail_1" data-role="none" class="input_text">
@@ -41,16 +42,65 @@
     <div class="ti_setup" id="ti_report_transmit">Report Transmition Interval <font color="#f00">*</font>
     </div>
 
-    <div class="sub_ti_setup" id="place_hours">Hours(04 to 99 and 15 min. Intervals) <font color="#f00">*</font>
+    <div class="sub_ti_setup" id="place_hours">Hours(00 to 99 and 15 min. Intervals) <font color="#f00">*</font>
     </div>
-    <input type="number" data-role="none" class="input_text" style="width: 42%" id="set_hora_transmicion" min="4"
+    <input type="number" data-role="none" class="input_text" style="width: 42%" id="set_hora_transmicion" min="0"
         onchange="minimo_max()">
-    <select data-role="none" class="input_text" style="width: 42%" id="set_minuto_transmicion">
+    <select onchange="minimo_minutos_max()" data-role="none" class="input_text" style="width: 42%"
+        id="set_minuto_transmicion">
         <option value="00">00</option>
+      <!--  <option value="1">1</option> -->
         <option value="15">15</option>
-        <option value="30">30</option>
+        <option id="op_0" value="30">30</option>
         <option value="45">45</option>
     </select>
+
+    <table width="100%">
+        <tr>
+            <td>
+                <div class="ti_setup" id="ti_activar_minutos_reporte_label" style="margin-top: 0px;">Time to send automatic report
+                </div>
+            </td>
+           
+        </tr>
+        <tr>
+            <td class="ti_setup" width="100" >
+                <select data-role="none" class="input_text" id="set_minreportes">
+                    <option value="1">1 min</option>
+                    <option value="2">2 min</option>
+                    <option value="3">3 min</option>
+                    <option value="4">4 min</option>
+                    <option value="5">5 min</option>
+                    <option value="6">6 min</option>
+                    <option value="7">7 min</option>
+                    <option value="8">8 min</option>
+                    <option value="9">9 min</option>
+                    <option value="10">10 min</option>
+                    <option value="11">11 min</option>
+                    <option value="12">12 min</option>
+                    <option value="13">13 min</option>
+                    <option value="14">14 min</option>
+                    <option value="15">15 min</option>
+                    <option value="16">16 min</option>
+                    <option value="17">17 min</option>
+                    <option value="18">18 min</option>
+                    <option value="19">19 min</option>
+                    <option value="20">20 min</option>
+                    <option value="21">21 min</option>
+                    <option value="22">22 min</option>
+                    <option value="23">23 min</option>
+                    <option value="24">24 min</option>
+                    <option value="25">25 min</option>
+                    <option value="26">26 min</option>
+                    <option value="27">27 min</option>
+                    <option value="28">28 min</option>
+                    <option value="29">29 min</option>
+                    <option value="30">30 min</option>
+
+                </select>
+            </td>
+        </tr>
+    </table>
 
     <div class="ti_setup" id="ti_activar_mandown">Tiempo de inactividad <font color="#f00">*</font>
     </div>
@@ -91,6 +141,37 @@
             </td>
         </tr>
     </table>
+
+    <table width="100%">
+        <tr>
+            <td>
+                <div class="ti_setup" id="ti_activar_mandown_label2" style="margin-top: 0px;">Detectar Caidas</div>
+            </td>
+            <td width="60">
+                <input type="checkbox" id="set_activarCaidas" data-role="none" class="input_text"
+                    style="margin-top: 5px; margin-bottom: 0px;height: 17px;">
+            </td>
+        </tr>
+    </table>
+
+    <table width="100%">
+        <tr>
+            <td>
+                <div class="ti_setup" id="ti_activar_mandown_label3" style="margin-top: 0px;">Sensibilidad Caidas</div>
+            </td>
+            <td width="80">
+                <select data-role="none" class="input_text" id="set_nivelCaidas">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+
+
+
 
     <div id="podometro_disponible_alert"
         style="padding: 9px; background-color: #F44336; margin: 21px; margin-top: 5px; margin-bottom: 5px; color: #fff; font-size: 13px;">

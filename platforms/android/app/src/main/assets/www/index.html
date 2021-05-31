@@ -125,9 +125,9 @@
                 </div>
                 <div style="text-align: left; margin-top: 15px;" onclick="Eliminar_Sitio()" id="bt_delete_site">Delete
                     Site</div>
-                   <!--<div style="text-align: left; margin-top: 15px;" onclick="Exportar_Sitio()" id="bt_export_site">Export
+                <!--<div style="text-align: left; margin-top: 15px;" onclick="Exportar_Sitio()" id="bt_export_site">Export
                     Site</div>
-                    --> 
+                    -->
             </div>
 
             <div id="cont_popup_Editar_Ronda" style="position: relative; z-index: 2 ">
@@ -192,6 +192,31 @@
                     <div align="center">
                         <input type="button" data-role="none" value="Cancel" class="bt_rojo bt_cancelar"
                             onclick="Cancelar_Quietud()" style="width: 90%">
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- POP UP ALERTA Caida -->
+    <!-- POP UP ALERTA Caida -->
+    <div class="PopUp" align="center" id="PopUpCaida" style="z-index: 500;">
+        <div class="BasePopUp" style="margin-top: 20px; width: 82%;">
+            <div id="cont_popup_Quietud">
+
+
+                <img src="img/icono_advertencia_amarillo.png" width="50">
+                <div class="parrafos">
+                    <div id="alert_quietud2">
+                        En 5 minutos se enviará una alerta informando caida.
+                    </div>
+
+                    <div align="center">
+                        <input type="button" data-role="none" value="Cancel" class="bt_rojo bt_cancelar"
+                            onclick="Cancelar_Quietud2()" style="width: 90%">
                     </div>
                 </div>
 
@@ -336,7 +361,7 @@
                 <input type="button" data-role="none" value="Scan" class="bt_verde" onclick="Activar_Escanner(3);"
                     style="width: 90%;" id="bt_escaner_lic">
                 <input type="button" data-role="none" value="Finalizar" class="bt_rojo bt_terminar"
-                    onclick="Ir_Home(); Cancelar_Escaner();" style="width: 90%;">
+                    onclick="Cancelar_Escaner(); Ir_Home(); " style="width: 90%;">
             </div>
         </div>
     </div>
@@ -380,8 +405,12 @@
     <!-- SCANNER -->
     <div data-role="page" id="SCANNER" class="page" align="center"
         style="background-color: rgba(0, 0, 57, 0) !important;">
+        <!--
         <div id="scanner"
             style=" background-image: url(img/area.png); background-size: cover; background-position: center;">
+-->
+        <div id="scanner"
+            style=" background:  url(img/area.png) fixed center; background-size: cover; background-position: center;">
             <!-- Cabecera -->
             <div class="cabecera">
                 <table width="100%">
@@ -403,7 +432,7 @@
                 <input type="button" data-role="none" value="Scan" class="bt_verde" onclick="Activar_Escanner(1);"
                     style="width: 90%;" id="bt_escanear">
                 <input type="button" data-role="none" value="Finalize" class="bt_rojo bt_finalizar"
-                    onclick="Ir_Home(); Cancelar_Escaner();" style="width: 90%;">
+                    onclick="Cancelar_Escaner(); Ir_Home();" style="width: 90%;">
             </div>
         </div>
     </div>
@@ -473,7 +502,7 @@
         </div>
     </div>
 
-            <!-- LISTA CAIDAS -->
+    <!-- LISTA CAIDAS -->
     <!-- LISTA CAIDAS -->
     <div data-role="page" id="CAIDAS" class="page" align="center">
         <div id="CAIDAS">
@@ -579,12 +608,38 @@
         function onDeviceReady() {
             console.log("Inicio de app");
 
+            /*Validar si el reporte ya se envio*/
+            if (localStorage.getItem("reporte_tour") != "") {
+
+                if (localStorage.getItem("iniciar_crono") == "activar") {
+
+                }
+                else {
+                    if(localStorage.getItem("reporte_tour")!=undefined){
+                        $("#PopUp").show();
+                    $("#parrafo_info").html('<img src="img/icono_advertencia_amarillo.png" width="30"/><br>');
+                    $("#parrafo_info").append(alertasText["alert_timer_debe_transmitir"] + "<br>");
+                    $("#parrafo_info").append('<input type="button" data-role="none" value="Ok" class="bt_verde" onclick="Ocultar_PopUp()">');
+                    Activar_Timer_Envio_Reporte();
+                    }
+                   
+                }
+            }
+
 
             /** Descomentar para volver a monitorear caidas*/
-         //   monitorearCaidas();
 
-           
+            if (localStorage.getItem("activar_caidas") == "1")
+                monitorearCaidas();
 
+            if (localStorage.getItem("activar_podemotro") == "1")
+                Activar_Pedometro()
+
+            //   console.log("el val es:  " + localStorage.getItem("pasosAntes"))
+            //reiniciar reportes
+            /*   localStorage.setItem("reporte_tour", "");
+               Solo_Setear_Fecha_Cierre();
+   */
             /*
             window.plugins.gdrive.uploadFile("archivo1.cvs","123,123,123",
                 function (res) {
@@ -624,7 +679,10 @@
             $("#PopUpAcerca").hide();
             $("#PopUp").hide();
             $("#menu_lateral").hide();
-
+//console.log("La locacion esss "==window.location)
+            if (window.location == "#HOME") {
+                return
+            }
             window.history.back();
             //navigator.app.backHistory();
             //History.go(-1);
